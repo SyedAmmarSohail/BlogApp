@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BlogApp.iml" filepath="$PROJECT_DIR$/.idea/modules/BlogApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BlogApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BlogApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/meditate/BlogApp.blog.iml" filepath="$PROJECT_DIR$/.idea/modules/meditate/BlogApp.blog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blog/meditate_data/BlogApp.blog.blog_data.iml" filepath="$PROJECT_DIR$/.idea/modules/blog/meditate_data/BlogApp.blog.blog_data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blog/meditate_domain/BlogApp.blog.blog_domain.iml" filepath="$PROJECT_DIR$/.idea/modules/blog/meditate_domain/BlogApp.blog.blog_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blog/meditate_presentation/BlogApp.blog.blog_presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/blog/meditate_presentation/BlogApp.blog.blog_presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BlogApp.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/BlogApp.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/BlogApp.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/BlogApp.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ui/BlogApp.core-ui.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ui/BlogApp.core-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/BlogApp.onboarding.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/BlogApp.onboarding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/BlogApp.onboarding.onboarding_domain.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/BlogApp.onboarding.onboarding_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/BlogApp.onboarding.onboarding_presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/BlogApp.onboarding.onboarding_presentation.iml" />
+    </modules>
+  </component>
+</project>
