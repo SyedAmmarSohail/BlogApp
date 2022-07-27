@@ -1,4 +1,4 @@
-package com.example.onboarding.composables
+package com.structure.onboarding_presentation.onboarding.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row

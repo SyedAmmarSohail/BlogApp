@@ -3,19 +3,19 @@ package com.structure.onboarding_presentation.onboarding
 import com.structure.core.R
 
 val imageIdList = listOf(
-    R.drawable.ic_breakfast,
-    R.drawable.ic_breakfast,
-    R.drawable.ic_breakfast,
+    R.drawable.ic_on_board_1,
+    R.drawable.ic_on_board_2,
+    R.drawable.ic_on_board_3,
 )
 
 val titleList = listOf(
-    "What is Lorem Ipsum?",
-    "Where does it come from?",
-    "Why do we use it?"
+    "Access Anywhere",
+    "Don’t Feel Alone",
+    "Happiness"
 )
 
 val descriptionList = listOf(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    "The video call feature can be accessed from anywhere in your house to help you.",
+    "Nobody likes to be alone and the built-in group video call feature helps you connect.",
+    "While working the app reminds you to smile, laugh, walk and talk with those who matters."
 )

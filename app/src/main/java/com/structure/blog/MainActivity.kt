@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
@@ -18,15 +17,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
-import com.example.onboarding.OnboardingScreen
-import com.example.onboarding.properties.OnboardingProperties
+import com.structure.onboarding_presentation.onboarding.OnBoardingScreen
+import com.structure.onboarding_presentation.onboarding.properties.OnboardingProperties
 import com.structure.blog.ui.theme.BlogTheme
 import com.structure.core.domain.preferences.Preferences
 import com.structure.blog.navigation.Route
 import com.structure.blog_presentation.blog_detail.BlogDetailScreen
 import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.blog_presentation.blog_overview.BlogOverviewScreen
-import com.structure.blog_presentation.blog_overview.blogList
 import com.structure.onboarding_presentation.activity.ActivityScreen
 import com.structure.onboarding_presentation.age.AgeScreen
 import com.structure.onboarding_presentation.gender.GenderScreen
@@ -36,7 +34,8 @@ import com.structure.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.structure.onboarding_presentation.weight.WeightScreen
 import com.structure.onboarding_presentation.welcome.WelcomeScreen
 import com.structure.blog_presentation.search.SearchScreen
-import com.structure.blog_presentation.tracker_overview.TrackerOverviewScreen
+import com.structure.core_ui.DarkGray
+import com.structure.core_ui.Purple
 import com.structure.onboarding_presentation.onboarding.descriptionList
 import com.structure.onboarding_presentation.onboarding.imageIdList
 import com.structure.onboarding_presentation.onboarding.titleList
@@ -74,7 +73,7 @@ class MainActivity : ComponentActivity() {
                             })
                         }
                         composable(Route.ON_BOARDING) {
-                            OnboardingScreen(
+                            OnBoardingScreen(
                                 imageIdList = imageIdList,
                                 navController = navController,
                                 lifecycleCoroutineScope = lifecycleScope,
@@ -82,15 +81,15 @@ class MainActivity : ComponentActivity() {
                                 descriptionList = descriptionList,
                                 skipTo = Route.BLOG_OVERVIEW,
                                 properties = OnboardingProperties(
-                                    buttonColor = Color.White,
-                                    selectedDotColor = Color.White,
+                                    buttonColor = DarkGray,
+                                    selectedDotColor = Purple,
                                     imageContentScale = ContentScale.Crop,
                                     titleFontSize = 24.sp,
                                     descriptionFontSize = 16.sp,
                                     titleFontFamily = FontFamily.Default,
                                     descriptionFontFamily = FontFamily.Default,
-                                    skipButtonName = "SKIP",
-                                    nextButtonName = "NEXT"
+                                    skipButtonName = "Skip",
+                                    nextButtonName = "Next"
                                 )
                             )
                         }
