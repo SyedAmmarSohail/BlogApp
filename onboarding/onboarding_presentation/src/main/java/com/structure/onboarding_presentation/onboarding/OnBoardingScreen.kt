@@ -177,7 +177,7 @@ fun OnBoardingScreen(
                                 navController.navigate(skipTo)
                                 return@launch
                             }
-                            pagerState.scrollToPage(pagerState.currentPage + 1)
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
 
                         }
                     },

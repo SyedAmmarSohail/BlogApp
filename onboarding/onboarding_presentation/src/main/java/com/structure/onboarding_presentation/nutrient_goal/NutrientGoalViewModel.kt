@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.structure.core.domain.preferences.Preferences
 import com.structure.core.domain.use_case.FilterOutDigits
 import com.structure.core.util.UiEvent
-import com.structure.onboarding_domain.use_case.ValidateNutrients
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class NutrientGoalViewModel @Inject constructor(
     private val preferences: Preferences,
     private val filterOutDigits: FilterOutDigits,
-    private val validateNutrients: ValidateNutrients
 ): ViewModel() {
 
     var state by mutableStateOf(NutrientGoalState())
@@ -46,26 +44,26 @@ class NutrientGoalViewModel @Inject constructor(
                 )
             }
             is NutrientGoalEvent.OnNextClick -> {
-                val result = validateNutrients(
-                    carbsRatioText = state.carbsRatio,
-                    proteinRatioText = state.proteinRatio,
-                    fatRatioText = state.fatRatio
-                )
-                when(result) {
-                    is ValidateNutrients.Result.Success -> {
-                        preferences.saveCarbRatio(result.carbsRatio)
-                        preferences.saveProteinRatio(result.proteinRatio)
-                        preferences.saveFatRatio(result.fatRatio)
-                        viewModelScope.launch {
-                            _uiEvent.send(UiEvent.Success)
-                        }
-                    }
-                    is ValidateNutrients.Result.Error -> {
-                        viewModelScope.launch {
-                            _uiEvent.send(UiEvent.ShowSnackbar(result.message))
-                        }
-                    }
-                }
+//                val result = validateNutrients(
+//                    carbsRatioText = state.carbsRatio,
+//                    proteinRatioText = state.proteinRatio,
+//                    fatRatioText = state.fatRatio
+//                )
+//                when(result) {
+//                    is ValidateNutrients.Result.Success -> {
+//                        preferences.saveCarbRatio(result.carbsRatio)
+//                        preferences.saveProteinRatio(result.proteinRatio)
+//                        preferences.saveFatRatio(result.fatRatio)
+//                        viewModelScope.launch {
+//                            _uiEvent.send(UiEvent.Success)
+//                        }
+//                    }
+//                    is ValidateNutrients.Result.Error -> {
+//                        viewModelScope.launch {
+//                            _uiEvent.send(UiEvent.ShowSnackbar(result.message))
+//                        }
+//                    }
+//                }
             }
         }
     }

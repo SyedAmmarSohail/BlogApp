@@ -1,8 +1,12 @@
 package com.structure.blog_domain.model
 
+import com.structure.core.domain.model.BlogType
+
 data class BlogModel(
     val title : String,
     val description : String,
-    val date : String,
-    val image : Int
+    val imageUrl : String,
+    val type : BlogType,
+    val date : String
 )
+

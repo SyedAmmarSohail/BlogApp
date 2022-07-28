@@ -3,6 +3,7 @@ package com.structure.blog_domain.repository
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.model.TrackableFood
 import com.structure.blog_domain.model.TrackedFood
+import com.structure.core.domain.model.BlogType
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
@@ -20,5 +21,10 @@ interface BlogRepository {
 
     fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>>
 
-    fun getBlog(): Flow<List<BlogModel>>
+    suspend fun getBlog(): Result<List<BlogModel>>
+
+    suspend fun insertBlogs(blogList: List<BlogModel>)
+
+    fun searchBlogsByType(blogType: BlogType): Flow<List<BlogModel>>
+
 }

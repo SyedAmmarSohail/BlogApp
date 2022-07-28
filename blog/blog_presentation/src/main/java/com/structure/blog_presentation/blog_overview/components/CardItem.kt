@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.R
 import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.core_ui.DarkGray
@@ -19,7 +20,7 @@ import com.structure.core_ui.Gray
 
 @Composable
 fun CardItem(
-    blog: Blog,
+    blog: BlogModel,
     onClick: () -> Unit
 ) {
 
@@ -28,11 +29,11 @@ fun CardItem(
             .clickable { onClick() }
             .padding(16.dp)) {
         Row(horizontalArrangement = Arrangement.Start) {
-            Image(
-                painterResource(blog.image),
-                contentDescription = "cardItemImage",
-                modifier = Modifier.size(120.dp)
-            )
+//            Image(
+//                painterResource(blog.imageUrl),
+//                contentDescription = "cardItemImage",
+//                modifier = Modifier.size(120.dp)
+//            )
             Spacer(modifier = Modifier.width(8.dp))
             Column(
                 verticalArrangement = Arrangement.Center

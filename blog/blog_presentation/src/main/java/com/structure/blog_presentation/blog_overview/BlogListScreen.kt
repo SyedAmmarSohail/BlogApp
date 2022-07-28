@@ -14,6 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.R
 import com.structure.blog_presentation.blog_overview.components.CardItem
 import com.structure.core_ui.DarkGreen
@@ -23,14 +24,15 @@ import com.structure.core_ui.component.ComposeVerticalList
 
 @Composable
 fun BlogListScreen(
-    onNavigateToDetail: (Blog) -> Unit,
+    state: BlogOverviewState,
+    onNavigateToDetail: (BlogModel) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(White)
     ) {
-        ComposeVerticalList(list = blogList/*, state = state*/) { item, index ->
+        ComposeVerticalList(list = state.blogs/*, state = state*/) { item, index ->
             CardItem(item) {
                 onNavigateToDetail(item)
             }

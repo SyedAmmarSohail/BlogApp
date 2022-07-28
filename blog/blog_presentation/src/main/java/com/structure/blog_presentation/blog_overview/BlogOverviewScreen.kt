@@ -13,36 +13,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.structure.blog_presentation.search.SearchEvent
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_overview.components.SearchTextField
 import kotlinx.coroutines.launch
 import com.structure.core.R
 import com.structure.core_ui.*
+import java.util.*
 
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
 @Composable
 fun BlogOverviewScreen(
-    onNavigateToDetail: (Blog) -> Unit,
+    onNavigateToDetail: (BlogModel) -> Unit,
+    viewModel : BlogOverviewViewModel = hiltViewModel()
 ) {
     val tabs = listOf(TabItem.Feature, TabItem.Latest, TabItem.Trending)
     val pagerState = rememberPagerState()
+    val state = viewModel.state
     Scaffold(
         modifier = Modifier.padding(16.dp),
         topBar = { TopBar() },
     ) {
         Column {
             Spacer(modifier = Modifier.height(16.dp))
-            Tabs(tabs = tabs, pagerState = pagerState)
-            TabsContent(tabs = tabs, pagerState = pagerState, onNavigateToDetail)
+            Tabs(tabs = tabs, pagerState = pagerState, viewModel)
+            TabsContent(tabs = tabs, pagerState = pagerState, onNavigateToDetail, state)
         }
     }
 }
@@ -53,7 +56,10 @@ fun TopBar() {
         Image(
             painter = painterResource(id = R.drawable.ninja),
             contentDescription = null,
-            modifier = Modifier.align(Alignment.End).clip(CircleShape).size(30.dp),
+            modifier = Modifier
+                .align(Alignment.End)
+                .clip(CircleShape)
+                .size(30.dp),
         )
         Spacer(modifier = Modifier.height(24.dp))
         SearchTextField(
@@ -86,7 +92,7 @@ fun TopBar() {
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
 @Composable
-fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
+fun Tabs(tabs: List<TabItem>, pagerState: PagerState, viewModel: BlogOverviewViewModel) {
     val scope = rememberCoroutineScope()
     // OR ScrollableTabRow()
     TabRow(
@@ -111,6 +117,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
                 unselectedContentColor = Gray,
                 selected = pagerState.currentPage == index,
                 onClick = {
+                    viewModel.onEvent(BlogOverViewEvent.onTabClick(tab.title.uppercase(Locale.getDefault())))
                     scope.launch {
                         pagerState.animateScrollToPage(index)
                     }
@@ -122,9 +129,14 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, onNavigateToDetail :(Blog) -> Unit) {
+fun TabsContent(
+    tabs: List<TabItem>,
+    pagerState: PagerState,
+    onNavigateToDetail: (BlogModel) -> Unit,
+    state: BlogOverviewState
+) {
     HorizontalPager(state = pagerState, count = tabs.size) { page ->
-        tabs[page].screen(){
+        tabs[page].screen(state){
             onNavigateToDetail(it)
         }
     }

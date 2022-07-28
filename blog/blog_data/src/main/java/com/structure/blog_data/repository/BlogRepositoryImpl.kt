@@ -1,14 +1,14 @@
 package com.structure.blog_data.repository
 
 import com.structure.blog_data.local.TrackerDao
-import com.structure.blog_data.mapper.toTrackableFood
-import com.structure.blog_data.mapper.toTrackedFood
-import com.structure.blog_data.mapper.toTrackedFoodEntity
+import com.structure.blog_data.mapper.*
 import com.structure.blog_data.remote.OpenFoodApi
+import com.structure.blog_data.remote.dto.BlogDto
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.model.TrackableFood
 import com.structure.blog_domain.model.TrackedFood
 import com.structure.blog_domain.repository.BlogRepository
+import com.structure.core.domain.model.BlogType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
@@ -16,7 +16,7 @@ import java.time.LocalDate
 class BlogRepositoryImpl(
     private val dao: TrackerDao,
     private val api: OpenFoodApi
-): BlogRepository {
+) : BlogRepository {
 
     override suspend fun searchFood(
         query: String,
@@ -34,7 +34,7 @@ class BlogRepositoryImpl(
                     .filter {
                         val calculatedCalories =
                             it.nutriments.carbohydrates100g * 4f +
-                                it.nutriments.proteins100g * 4f +
+                                    it.nutriments.proteins100g * 4f +
                                     it.nutriments.fat100g * 9f
                         val lowerBound = calculatedCalories * 0.99f
                         val upperBound = calculatedCalories * 1.01f
@@ -42,7 +42,7 @@ class BlogRepositoryImpl(
                     }
                     .mapNotNull { it.toTrackableFood() }
             )
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)
         }
@@ -66,8 +66,34 @@ class BlogRepositoryImpl(
         }
     }
 
-    override fun getBlog(): Flow<List<BlogModel>> {
-        TODO("Not yet implemented")
-//        return emptyList()
+    override suspend fun getBlog(): Result<List<BlogModel>> {
+        return try {
+            val response = api.getBlogs()
+            if (response.isSuccessful) {
+                val blogDto = response.body() as BlogDto
+                Result.success(
+                    blogDto.blogs
+                        .mapNotNull { it.toBlogModel() }
+                )
+            } else {
+                Result.failure(Exception("Service Fail"))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.failure(e)
+        }
+    }
+
+
+
+    override suspend fun insertBlogs(blogList: List<BlogModel>) {
+        dao.insertBlogs(blogList.mapNotNull { it.toBlogEntity() })
+    }
+
+    override fun searchBlogsByType(blogType: BlogType): Flow<List<BlogModel>> {
+        return dao.searchBlog(blogType.name
+        ).map { entities ->
+            entities.map { it.toBlogModel() }
+        }
     }
 }

@@ -148,7 +148,7 @@ class MainActivity : ComponentActivity() {
                                         Route.DETAIL + "/${blog.title}" +
                                                 "/${blog.description}" +
                                                 "/${blog.date}" +
-                                                "/${blog.image}"
+                                                "/${blog.imageUrl}"
                                     )
                                 }
                             )
