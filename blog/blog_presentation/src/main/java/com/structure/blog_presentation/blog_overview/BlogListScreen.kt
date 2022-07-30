@@ -33,7 +33,7 @@ fun BlogListScreen(
             .background(White)
     ) {
         ComposeVerticalList(list = state.blogs/*, state = state*/) { item, index ->
-            CardItem(item) {
+            CardItem(state.isSearching, item) {
                 onNavigateToDetail(item)
             }
         }

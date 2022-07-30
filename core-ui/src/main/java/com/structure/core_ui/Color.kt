@@ -15,3 +15,5 @@ val DarkGray = Color(0xFF202020)
 val TextWhite = Color(0xFFEEEEEE)
 val White = Color(0xFFFFFFFF)
 val Purple = Color(0xFF9B3C82)
+
+var colorGray = Color(0xFFE6EDF0)

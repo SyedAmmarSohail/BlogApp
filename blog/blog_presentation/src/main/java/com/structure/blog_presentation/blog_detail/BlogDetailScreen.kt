@@ -17,6 +17,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.core.R
 import com.structure.core_ui.DarkGray
@@ -24,7 +26,7 @@ import com.structure.core_ui.Gray
 
 @Composable
 fun BlogDetailScreen(
-    blog: Blog,
+    blog: BlogModel,
     onNavigateUp: () -> Unit,
 ) {
 
@@ -34,7 +36,15 @@ fun BlogDetailScreen(
     ) {
         Box(/*modifier = Modifier.weight(1.5f)*/) {
             Image(
-                painterResource(blog.image),
+                painter = rememberImagePainter(
+                    data = blog.imageUrl,
+                    builder = {
+                        crossfade(true)
+                        error(R.drawable.ic_logo)
+                        fallback(R.drawable.ic_logo)
+                        placeholder(R.drawable.ic_logo)
+                    }
+                ),
                 contentDescription = "cardDetailImage",
                 modifier = Modifier.aspectRatio(1f),
                 contentScale = ContentScale.Fit

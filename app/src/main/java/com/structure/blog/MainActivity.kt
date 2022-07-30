@@ -22,6 +22,7 @@ import com.structure.onboarding_presentation.onboarding.properties.OnboardingPro
 import com.structure.blog.ui.theme.BlogTheme
 import com.structure.core.domain.preferences.Preferences
 import com.structure.blog.navigation.Route
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_detail.BlogDetailScreen
 import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.blog_presentation.blog_overview.BlogOverviewScreen
@@ -34,12 +35,15 @@ import com.structure.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.structure.onboarding_presentation.weight.WeightScreen
 import com.structure.onboarding_presentation.welcome.WelcomeScreen
 import com.structure.blog_presentation.search.SearchScreen
+import com.structure.core.domain.model.BlogType
 import com.structure.core_ui.DarkGray
 import com.structure.core_ui.Purple
 import com.structure.onboarding_presentation.onboarding.descriptionList
 import com.structure.onboarding_presentation.onboarding.imageIdList
 import com.structure.onboarding_presentation.onboarding.titleList
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 @ExperimentalComposeUiApi
@@ -145,10 +149,12 @@ class MainActivity : ComponentActivity() {
                             BlogOverviewScreen(
                                 onNavigateToDetail = { blog ->
                                     navController.navigate(
-                                        Route.DETAIL + "/${blog.title}" +
+                                        Route.DETAIL + "/${blog.id}" +
+                                                "/${blog.title}" +
                                                 "/${blog.description}" +
-                                                "/${blog.date}" +
-                                                "/${blog.imageUrl}"
+                                                "/${blog.type.name}" +
+                                                "/${URLEncoder.encode(blog.imageUrl, StandardCharsets.UTF_8.toString())}" +
+                                                "/${blog.date}"
                                     )
                                 }
                             )
@@ -198,27 +204,43 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Route.DETAIL + "/{blogTitle}/{blogDesc}/{blogDate}/{blogImage}",
+                            route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogImage}/{blogDate}",
                             arguments = listOf(
+                                navArgument("blogId") {
+                                    type = NavType.StringType
+                                },
                                 navArgument("blogTitle") {
                                     type = NavType.StringType
                                 },
                                 navArgument("blogDesc") {
                                     type = NavType.StringType
                                 },
-                                navArgument("blogDate") {
+                                navArgument("blogType") {
                                     type = NavType.StringType
                                 },
                                 navArgument("blogImage") {
-                                    type = NavType.IntType
+                                    type = NavType.StringType
+                                },
+                                navArgument("blogDate") {
+                                    type = NavType.StringType
                                 },
                             )
                         ) {
+                            val blogId = it.arguments?.getString("blogId")!!
                             val blogTitle = it.arguments?.getString("blogTitle")!!
                             val blogDesc = it.arguments?.getString("blogDesc")!!
+                            val blogType = it.arguments?.getString("blogType")!!
+                            val blogImage = it.arguments?.getString("blogImage")!!
                             val blogDate = it.arguments?.getString("blogDate")!!
-                            val blogImage = it.arguments?.getInt("blogImage")!!
-                            BlogDetailScreen(Blog(blogTitle, blogDesc, blogDate, blogImage),
+                            BlogDetailScreen(
+                                BlogModel(
+                                    id = blogId,
+                                    title = blogTitle,
+                                    description = blogDesc,
+                                    imageUrl = blogImage,
+                                    type = BlogType.valueOf(blogType),
+                                    date = blogDate,
+                                ),
                                 onNavigateUp = {
                                     navController.navigateUp()
                                 }

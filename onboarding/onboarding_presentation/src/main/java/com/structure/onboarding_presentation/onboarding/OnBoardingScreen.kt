@@ -36,6 +36,7 @@ fun OnBoardingScreen(
 ) {
     val state = remember { OnBoardingState() }
     val pagerState = rememberPagerState()
+    val scope = rememberCoroutineScope()
     var currentPage = pagerState.currentPage
     if (pageNum in 3..5) {
         Box(
@@ -171,14 +172,13 @@ fun OnBoardingScreen(
                     buttonColor = properties.buttonColor,
                     skipTo = skipTo,
                     nextOnClick = {
-                        lifecycleCoroutineScope.launch(Dispatchers.Main) {
+                        scope.launch {
                             if (pagerState.currentPage == pageNum - 1) {
                                 navController.popBackStack()
                                 navController.navigate(skipTo)
                                 return@launch
                             }
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
-
                         }
                     },
                     arrowDrawableId = properties.nextArrowIconDrawableId

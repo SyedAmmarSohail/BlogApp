@@ -11,7 +11,7 @@ data class BlogEntity(
     val title : String,
     val description : String,
     val image : String,
-    val type : String,
+    val type : BlogType,
     val date : String
 )
 

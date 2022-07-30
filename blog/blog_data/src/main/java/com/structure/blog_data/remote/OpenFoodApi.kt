@@ -15,7 +15,7 @@ interface OpenFoodApi {
         @Query("page_size") pageSize: Int
     ): SearchDto
 
-    @GET("https://run.mocky.io/v3/c8155628-fe60-415e-90b3-7c5b82d8e65d")
+    @GET("https://run.mocky.io/v3/b0b5d515-e4f5-42ca-b424-5ccfff2e2083")
     suspend fun getBlogs(
     ): Response<BlogDto>
 

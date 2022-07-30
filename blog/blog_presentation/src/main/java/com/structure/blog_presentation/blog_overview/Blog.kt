@@ -1,13 +1,15 @@
 package com.structure.blog_presentation.blog_overview
 
 import androidx.annotation.DrawableRes
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.R
+import com.structure.core.domain.model.BlogType
 
 data class Blog(
-    val title : String,
-    val description : String,
-    val date : String,
-    @DrawableRes val image : Int
+    val title: String,
+    val description: String,
+    val date: String,
+    @DrawableRes val image: Int
 )
 
 val blogList = listOf<Blog>(
@@ -24,3 +26,14 @@ val blogList = listOf<Blog>(
         R.drawable.chocolate
     )
 )
+
+val blogModel = BlogModel(
+    "1",
+    "title",
+    "description",
+    "imageUrl",
+    BlogType.FEATURED,
+    "date"
+)
+
+val dummyBlogList = listOf(blogModel, blogModel, blogModel, blogModel)

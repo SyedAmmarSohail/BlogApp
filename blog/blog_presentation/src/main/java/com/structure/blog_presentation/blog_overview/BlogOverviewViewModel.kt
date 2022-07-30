@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.use_case.TrackerUseCases
 import com.structure.blog_presentation.R
 import com.structure.core.domain.model.BlogType
@@ -15,6 +16,7 @@ import com.structure.core.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -50,9 +52,9 @@ class BlogOverviewViewModel @Inject constructor(
     private fun getBlogByType(blogType: BlogType) {
         state = state.copy(blogs = emptyList())
 //        viewModelScope.launch {
-            trackerUseCases.searchBlog(blogType).onEach { blogs ->
-                state = state.copy(blogs = blogs)
-            }.launchIn(viewModelScope)
+        trackerUseCases.searchBlog(blogType).onEach { blogs ->
+            state = state.copy(blogs = blogs)
+        }.launchIn(viewModelScope)
 //            state =
 //                state.copy(
 //                    blogs = ent)
@@ -62,9 +64,10 @@ class BlogOverviewViewModel @Inject constructor(
     private fun getBlogs(blogType: BlogType) {
         state = state.copy(
             isSearching = true,
-            blogs = emptyList()
+            blogs = dummyBlogList
         )
         viewModelScope.launch {
+            delay(4000)
             trackerUseCases.getBlog().onSuccess { blogList ->
                 trackerUseCases.storeBlogs(blogList)
                 state =

@@ -7,16 +7,18 @@ import com.structure.core.domain.model.BlogType
 
 fun BlogModel.toBlogEntity(): BlogEntity {
     return BlogEntity(
+        id = this.id,
         title = this.title,
         description = this.description,
         image = this.imageUrl,
-        type = this.type.name,
+        type = this.type,
         date = this.date
     )
 }
 
 fun Article.toBlogModel(): BlogModel {
     return BlogModel(
+        this.id,
         this.title,
         this.description,
         this.imageUrl,
@@ -27,10 +29,11 @@ fun Article.toBlogModel(): BlogModel {
 
 fun BlogEntity.toBlogModel(): BlogModel {
     return BlogModel(
+        this.id,
         this.title,
         this.description,
         this.image,
-        BlogType.valueOf(this.type),
+        this.type,
         this.date
     )
 }
