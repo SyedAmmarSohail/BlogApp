@@ -41,9 +41,17 @@ class BlogOverviewViewModel @Inject constructor(
 
     fun onEvent(event: BlogOverViewEvent) {
         when (event) {
-            BlogOverViewEvent.onMarkFavorite -> TODO()
-            is BlogOverViewEvent.onTabClick -> {
+            BlogOverViewEvent.OnMarkFavorite -> TODO()
+            is BlogOverViewEvent.OnTabClick -> {
                 getBlogByType(BlogType.valueOf(event.title))
+            }
+            is BlogOverViewEvent.OnSearchKey -> {
+                state= state.copy(searchKey = event.key)
+            }
+            is BlogOverViewEvent.OnSearchFocusedChanged -> {
+                state = state.copy(
+                    isHintVisible = !event.isFocused && state.searchKey.isBlank()
+                )
             }
         }
     }

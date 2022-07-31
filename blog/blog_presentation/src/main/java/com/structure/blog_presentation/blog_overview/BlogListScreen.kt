@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.sp
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.R
@@ -20,6 +21,7 @@ import com.structure.blog_presentation.blog_overview.components.CardItem
 import com.structure.core_ui.DarkGreen
 import com.structure.core_ui.White
 import com.structure.core_ui.component.ComposeVerticalList
+import java.util.*
 
 
 @Composable
@@ -32,7 +34,15 @@ fun BlogListScreen(
             .fillMaxSize()
             .background(White)
     ) {
-        ComposeVerticalList(list = state.blogs/*, state = state*/) { item, index ->
+        val filterList = if (state.searchKey.isEmpty()) {
+            state.blogs
+        } else state.blogs.filter {
+            it.title.lowercase(
+                Locale.getDefault()
+            ).contains(state.searchKey.lowercase(Locale.getDefault()))
+        }
+
+        ComposeVerticalList(list = filterList/*, state = state*/) { item, index ->
             CardItem(state.isSearching, item) {
                 onNavigateToDetail(item)
             }

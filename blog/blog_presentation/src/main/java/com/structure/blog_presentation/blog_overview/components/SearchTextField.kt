@@ -73,7 +73,7 @@ fun SearchTextField(
                     .padding(2.dp)
                     .fillMaxWidth()
                     .onFocusChanged { onFocusChanged(it) }
-                    .testTag("search_textfield")
+                    .testTag("searchField")
             )
             if (shouldShowHint) {
                 Text(
