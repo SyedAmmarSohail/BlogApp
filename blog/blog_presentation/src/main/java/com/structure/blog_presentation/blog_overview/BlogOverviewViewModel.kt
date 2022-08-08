@@ -59,14 +59,9 @@ class BlogOverviewViewModel @Inject constructor(
     @OptIn(FlowPreview::class)
     private fun getBlogByType(blogType: BlogType) {
         state = state.copy(blogs = emptyList())
-//        viewModelScope.launch {
         trackerUseCases.searchBlog(blogType).onEach { blogs ->
             state = state.copy(blogs = blogs)
         }.launchIn(viewModelScope)
-//            state =
-//                state.copy(
-//                    blogs = ent)
-//        }
     }
 
     private fun getBlogs(blogType: BlogType) {
@@ -81,7 +76,7 @@ class BlogOverviewViewModel @Inject constructor(
                 state =
                     state.copy(blogs = blogList.filter { it.type == blogType }, isSearching = false)
             }.onFailure {
-                state = state.copy(isSearching = false)
+                state = state.copy(blogs = emptyList(), isSearching = false)
                 _uiEvent.send(
                     UiEvent.ShowSnackbar(
                         UiText.StringResource(R.string.error_something_went_wrong)
