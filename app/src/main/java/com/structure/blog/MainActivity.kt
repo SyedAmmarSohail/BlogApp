@@ -145,7 +145,7 @@ class MainActivity : ComponentActivity() {
                             })
                         }
 
-                        composable(Route.TRACKER_OVERVIEW) {
+                        composable(Route.BLOG_OVERVIEW) {
                             BlogOverviewScreen(
                                 onNavigateToDetail = { blog ->
                                     navController.navigate(

@@ -75,7 +75,7 @@ class BlogOverviewViewModel @Inject constructor(
             blogs = dummyBlogList
         )
         viewModelScope.launch {
-            delay(4000)
+//            delay(4000)
             trackerUseCases.getBlog().onSuccess { blogList ->
                 trackerUseCases.storeBlogs(blogList)
                 state =

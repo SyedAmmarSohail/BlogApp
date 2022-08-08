@@ -2,85 +2,81 @@ package com.structure.blog_data.repository
 
 import com.google.common.truth.Truth.assertThat
 import com.structure.blog_data.remote.OpenFoodApi
-import com.structure.blog_data.remote.malformedFoodResponse
-import com.structure.blog_data.remote.validFoodResponse
+import com.structure.blog_data.remote.dto.Article
+import com.structure.blog_data.remote.dto.BlogDto
+import com.structure.core.domain.model.BlogType
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody
 import org.junit.Before
 import org.junit.Test
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.doAnswer
+import org.mockito.kotlin.whenever
+import retrofit2.Response
+import java.io.IOException
 
 class BlogRepositoryImplTest {
 
     private lateinit var repository: BlogRepositoryImpl
-    private lateinit var mockWebServer: MockWebServer
-    private lateinit var okHttpClient: OkHttpClient
-    private lateinit var api: OpenFoodApi
+
+    @Mock
+    private lateinit var service: OpenFoodApi
 
     @Before
     fun setUp() {
-        mockWebServer = MockWebServer()
-        okHttpClient = OkHttpClient.Builder()
-            .writeTimeout(1, TimeUnit.SECONDS)
-            .readTimeout(1, TimeUnit.SECONDS)
-            .connectTimeout(1, TimeUnit.SECONDS)
-            .build()
-        api = Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .baseUrl(mockWebServer.url("/"))
-            .build()
-            .create(OpenFoodApi::class.java)
+        MockitoAnnotations.openMocks(this)
         repository = BlogRepositoryImpl(
             dao = mockk(relaxed = true),
-            api = api
+            api = service
         )
-    }
-
-    @After
-    fun tearDown() {
-        mockWebServer.shutdown()
     }
 
     @Test
-    fun `Search food, valid response, returns results`() = runBlocking {
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(200)
-                .setBody(validFoodResponse)
+    fun `get blogs, return success`(): Unit = runBlocking {
+        whenever(service.getBlogs()).thenReturn(
+            Response.success(
+                getBlogDto()
+            )
         )
-        val result = repository.searchFood("banana", 1, 40)
+
+        val result = repository.getBlog()
 
         assertThat(result.isSuccess).isTrue()
     }
 
     @Test
-    fun `Search food, invalid response, returns failure`() = runBlocking {
-        mockWebServer.enqueue(
-            MockResponse()
-                .setResponseCode(403)
-                .setBody(validFoodResponse)
-        )
-        val result = repository.searchFood("banana", 1, 40)
+    fun `get blogs, return error`(): Unit = runBlocking {
+        whenever(service.getBlogs()).thenReturn(Response.error(400, responseBody()))
+
+        val result = repository.getBlog()
 
         assertThat(result.isFailure).isTrue()
     }
 
     @Test
-    fun `Search food, malformed response, returns failure`() = runBlocking {
-        mockWebServer.enqueue(
-            MockResponse()
-                .setBody(malformedFoodResponse)
-        )
-        val result = repository.searchFood("banana", 1, 40)
+    fun `get blogs, return exception`(): Unit = runBlocking {
+        doAnswer { throw IOException() }.`when`(service).getBlogs()
+
+        val result = repository.getBlog()
 
         assertThat(result.isFailure).isTrue()
     }
 
+    private fun responseBody() = ResponseBody.create("application/json".toMediaTypeOrNull(), "")
+
+    private fun getBlogDto() = BlogDto(
+        blogs = listOf(
+            Article(
+                "id",
+                title = "title",
+                description = "description",
+                "imageUrl",
+                type = BlogType.FEATURED,
+                date = "date"
+            )
+        )
+    )
 }

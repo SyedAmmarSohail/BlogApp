@@ -76,7 +76,7 @@ class BlogRepositoryImpl(
                         .mapNotNull { it.toBlogModel() }
                 )
             } else {
-                Result.failure(Exception("Service Fail"))
+                Result.failure(Exception("Service Failed"))
             }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -14,5 +14,5 @@ object Route {
     const val TRACKER_OVERVIEW = "tracker_overview"
     const val SEARCH = "search"
     const val DETAIL = "detail"
-    const val BLOG_OVERVIEW = "tracker_overview"
+    const val BLOG_OVERVIEW = "blog_overview"
 }

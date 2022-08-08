@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
@@ -36,7 +38,11 @@ fun CardItem(
         Box(
             Modifier
                 .clickable { onClick() }
-                .padding(vertical = 16.dp)) {
+                .padding(vertical = 16.dp)
+                .semantics {
+                    contentDescription = "cardItem"
+                },
+            ) {
             Row(
                 horizontalArrangement = Arrangement.Start,
                 modifier = Modifier.fillMaxSize(),
