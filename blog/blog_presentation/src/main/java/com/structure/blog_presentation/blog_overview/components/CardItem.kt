@@ -1,7 +1,6 @@
 package com.structure.blog_presentation.blog_overview.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -9,21 +8,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.R
-import com.structure.blog_presentation.blog_overview.Blog
-import com.structure.core_ui.DarkGray
-import com.structure.core_ui.Gray
+import com.structure.core_ui.*
 import com.structure.core_ui.component.ImagePlaceHolder
 import com.structure.core_ui.component.LinePlaceHolder
 
@@ -38,7 +30,7 @@ fun CardItem(
         Box(
             Modifier
                 .clickable { onClick() }
-                .padding(vertical = 16.dp)
+                .padding(vertical = MaterialTheme.spacing.view_4x)
                 .semantics {
                     contentDescription = "cardItem"
                 },
@@ -59,9 +51,9 @@ fun CardItem(
                         }
                     ),
                     contentDescription = "cardItemImage",
-                    modifier = Modifier.size(120.dp)
+                    modifier = Modifier.size(MaterialTheme.spacing.view_30x)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                spacerWidth(width = MaterialTheme.spacing.view_2x)
                 Column(
                     verticalArrangement = Arrangement.Bottom,
                     modifier = Modifier.fillMaxSize()
@@ -72,8 +64,8 @@ fun CardItem(
                         color = DarkGray,
                         fontWeight = FontWeight.Bold
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = blog.date, style = MaterialTheme.typography.body1, color = Gray)
+                    spacerHeight(height = MaterialTheme.spacing.view_1x)
+                    Text(text = blog.date, style = MaterialTheme.typography.caption, color = Gray)
                 }
             }
 
@@ -87,7 +79,7 @@ fun CardItem(
 fun PlaceholderCardItem() {
     Box(
         Modifier
-            .padding(vertical = 16.dp)
+            .padding(vertical = MaterialTheme.spacing.view_4x)
     ) {
         Row(
             horizontalArrangement = Arrangement.Start,
@@ -95,18 +87,18 @@ fun PlaceholderCardItem() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             ImagePlaceHolder(
-                size = 120.dp
+                size = MaterialTheme.spacing.view_30x
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            spacerWidth(width = MaterialTheme.spacing.view_2x)
             Column(
                 verticalArrangement = Arrangement.Bottom,
                 modifier = Modifier.fillMaxSize()
             ) {
                 LinePlaceHolder(
-                    width = 200.dp
+                    width = MaterialTheme.spacing.view_50x
                 )
-                Spacer(modifier = Modifier.height(4.dp))
-                LinePlaceHolder(width = 100.dp)
+                spacerHeight(height = MaterialTheme.spacing.view_1x)
+                LinePlaceHolder(width = MaterialTheme.spacing.view_25x)
             }
         }
 

@@ -2,24 +2,24 @@ package com.structure.onboarding_presentation.onboarding
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.NavController
 import com.structure.onboarding_presentation.onboarding.composables.DotsIndicator
 import com.structure.onboarding_presentation.onboarding.composables.OnBoardingButtons
-import com.structure.onboarding_presentation.onboarding.composables.OnboardingScreenImage
+import com.structure.onboarding_presentation.onboarding.composables.OnBoardingScreenImage
 import com.structure.onboarding_presentation.onboarding.composables.TitleAndContent
-import com.structure.onboarding_presentation.onboarding.properties.OnboardingProperties
+import com.structure.onboarding_presentation.onboarding.properties.OnBoardingProperties
 import com.structure.onboarding_presentation.onboarding.state.OnBoardingState
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import kotlinx.coroutines.Dispatchers
+import com.structure.core_ui.spacing
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class, kotlinx.coroutines.InternalCoroutinesApi::class)
@@ -32,12 +32,11 @@ fun OnBoardingScreen(
     titleList: List<String>,
     descriptionList: List<String>,
     skipTo: String,
-    properties: OnboardingProperties,
+    properties: OnBoardingProperties,
 ) {
     val state = remember { OnBoardingState() }
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
-    var currentPage = pagerState.currentPage
     if (pageNum in 3..5) {
         Box(
             modifier = Modifier
@@ -128,14 +127,13 @@ fun OnBoardingScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
 
-                    OnboardingScreenImage(
+                    OnBoardingScreenImage(
                         imageId = state.imageId,
                         contentScale = properties.imageContentScale,
                     )
                     Column(
                         Modifier
-//                            .fillMaxSize()
-                            .padding(16.dp, 0.dp),
+                            .padding(horizontal = MaterialTheme.spacing.view_4x),
                     ) {
 
                         state.title?.let {

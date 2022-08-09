@@ -13,16 +13,14 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.structure.blog_domain.model.BlogModel
-import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.core.R
 import com.structure.core_ui.DarkGray
 import com.structure.core_ui.Gray
+import com.structure.core_ui.spacerHeight
+import com.structure.core_ui.spacing
 
 @Composable
 fun BlogDetailScreen(
@@ -34,7 +32,7 @@ fun BlogDetailScreen(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
     ) {
-        Box(/*modifier = Modifier.weight(1.5f)*/) {
+        Box() {
             Image(
                 painter = rememberImagePainter(
                     data = blog.imageUrl,
@@ -54,10 +52,10 @@ fun BlogDetailScreen(
                 contentDescription = "backIcon",
                 modifier = Modifier
                     .clickable { onNavigateUp() }
-                    .padding(16.dp)
+                    .padding(MaterialTheme.spacing.view_4x)
             )
         }
-        Box(modifier = Modifier.padding(16.dp)) {
+        Box(modifier = Modifier.padding(MaterialTheme.spacing.view_4x)) {
             Column {
                 Text(
                     text = blog.title,
@@ -65,7 +63,7 @@ fun BlogDetailScreen(
                     color = DarkGray,
                     fontWeight = FontWeight.Bold
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                spacerHeight(height = MaterialTheme.spacing.view_1x)
                 Text(text = blog.description, style = MaterialTheme.typography.body1, color = Gray)
             }
 

@@ -9,13 +9,13 @@ val imageIdList = listOf(
 )
 
 val titleList = listOf(
-    "Access Anywhere",
-    "Don’t Feel Alone",
-    "Happiness"
+    "Blogging Review",
+    "Blog Beauty",
+    "Blog Creation"
 )
 
 val descriptionList = listOf(
-    "The video call feature can be accessed from anywhere in your house to help you.",
-    "Nobody likes to be alone and the built-in group video call feature helps you connect.",
-    "While working the app reminds you to smile, laugh, walk and talk with those who matters."
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 )

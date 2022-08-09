@@ -1,12 +1,10 @@
 package com.structure.blog_presentation.blog_overview
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.use_case.TrackerUseCases
 import com.structure.blog_presentation.R
 import com.structure.core.domain.model.BlogType
@@ -70,7 +68,7 @@ class BlogOverviewViewModel @Inject constructor(
             blogs = dummyBlogList
         )
         viewModelScope.launch {
-//            delay(4000)
+            delay(1000)
             trackerUseCases.getBlog().onSuccess { blogList ->
                 trackerUseCases.storeBlogs(blogList)
                 state =
@@ -78,7 +76,7 @@ class BlogOverviewViewModel @Inject constructor(
             }.onFailure {
                 state = state.copy(blogs = emptyList(), isSearching = false)
                 _uiEvent.send(
-                    UiEvent.ShowSnackbar(
+                    UiEvent.ShowToast(
                         UiText.StringResource(R.string.error_something_went_wrong)
                     )
                 )

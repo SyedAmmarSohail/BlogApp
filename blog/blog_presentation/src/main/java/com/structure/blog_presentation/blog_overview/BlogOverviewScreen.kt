@@ -1,5 +1,6 @@
 package com.structure.blog_presentation.blog_overview
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,9 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -24,6 +26,7 @@ import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_overview.components.SearchTextField
 import kotlinx.coroutines.launch
 import com.structure.core.R
+import com.structure.core.util.UiEvent
 import com.structure.core_ui.*
 import java.util.*
 
@@ -40,10 +43,24 @@ fun BlogOverviewScreen(
     val tabs = listOf(TabItem.Feature, TabItem.Latest, TabItem.Trending)
     val pagerState = rememberPagerState()
     val state = viewModel.state
+    val context = LocalContext.current
 
-    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    LaunchedEffect(key1 = keyboardController) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.ShowToast -> {
+                    Toast.makeText(context, event.message.asString(context), Toast.LENGTH_SHORT).show()
+                    keyboardController?.hide()
+                }
+                else -> Unit
+            }
+        }
+    }
+
+    Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.view_4x)) {
         TopBar(viewModel)
-        Spacer(modifier = Modifier.height(16.dp))
+        spacerHeight(height = MaterialTheme.spacing.view_4x)
         Tabs(tabs = tabs, pagerState = pagerState, viewModel)
         TabsContent(tabs = tabs, pagerState = pagerState, onNavigateToDetail, state)
     }
@@ -52,19 +69,19 @@ fun BlogOverviewScreen(
 @Composable
 fun TopBar(viewModel: BlogOverviewViewModel) {
     var text by rememberSaveable { mutableStateOf("") }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(top = MaterialTheme.spacing.view_4x)) {
         Image(
             painter = painterResource(id = R.drawable.ninja),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.End)
                 .clip(CircleShape)
-                .size(30.dp),
+                .size(MaterialTheme.spacing.view_8x),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        spacerHeight(height = MaterialTheme.spacing.view_6x)
         SearchTextField(
             modifier = Modifier
-                .clip(shape = RoundedCornerShape(25.dp))
+                .clip(shape = RoundedCornerShape(MaterialTheme.spacing.view_6x))
                 .background(color = LightGray),
             text = text,
             onValueChange = {
@@ -111,7 +128,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState, viewModel: BlogOverviewVie
                         pagerState.animateScrollToPage(index)
                     }
                 },
-                modifier = Modifier.clip(RoundedCornerShape(25.dp))
+                modifier = Modifier.clip(RoundedCornerShape(MaterialTheme.spacing.view_6x))
             )
         }
     }

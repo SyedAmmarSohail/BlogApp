@@ -4,24 +4,25 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import com.structure.core_ui.spacing
 
 @Composable
-fun OnboardingScreenImage(imageId: Int, contentScale: ContentScale) {
+fun OnBoardingScreenImage(imageId: Int, contentScale: ContentScale) {
     Row(
         modifier = Modifier
             .wrapContentSize(align = TopCenter)
-            .padding(48.dp, 48.dp, 48.dp, 16.dp)
+            .padding(horizontal = MaterialTheme.spacing.view_12x, vertical = MaterialTheme.spacing.view_4x)
     ) {
         if (imageId != 0) {
             Image(
                 painter = painterResource(id = imageId),
-                contentDescription = "Onboarding image",
+                contentDescription = "OnBoardingImage",
                 contentScale = contentScale
             )
 

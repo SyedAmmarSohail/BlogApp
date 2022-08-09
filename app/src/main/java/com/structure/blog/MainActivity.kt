@@ -29,7 +29,7 @@ import com.structure.core_ui.Purple
 import com.structure.onboarding_presentation.onboarding.OnBoardingScreen
 import com.structure.onboarding_presentation.onboarding.descriptionList
 import com.structure.onboarding_presentation.onboarding.imageIdList
-import com.structure.onboarding_presentation.onboarding.properties.OnboardingProperties
+import com.structure.onboarding_presentation.onboarding.properties.OnBoardingProperties
 import com.structure.onboarding_presentation.onboarding.titleList
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
                                 titleList = titleList,
                                 descriptionList = descriptionList,
                                 skipTo = Route.BLOG_OVERVIEW,
-                                properties = OnboardingProperties(
+                                properties = OnBoardingProperties(
                                     buttonColor = DarkGray,
                                     selectedDotColor = Purple,
                                     imageContentScale = ContentScale.Crop,

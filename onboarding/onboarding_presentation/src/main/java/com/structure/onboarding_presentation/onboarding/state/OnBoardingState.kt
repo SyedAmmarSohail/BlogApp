@@ -4,7 +4,8 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 
-data class OnBoardingState @OptIn(ExperimentalPagerApi::class) constructor(
+@OptIn(ExperimentalPagerApi::class)
+data class OnBoardingState constructor(
     var imageId: Int = 0,
     var pagerState: PagerState? = null,
     var title: String? = null,

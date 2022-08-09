@@ -1,6 +1,7 @@
 package com.structure.onboarding_presentation.onboarding.composables
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -10,15 +11,22 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
+import com.structure.core_ui.spacing
 
 @Composable
-fun TitleAndContent(title: String, description: String, titleColor: Color,
-                                   descriptionColor: Color, titleFontSize: TextUnit,
-                                   descriptionFontSize: TextUnit, titleFontFamily: FontFamily,
-                                   descriptionFontFamily: FontFamily
+fun TitleAndContent(
+    title: String, description: String, titleColor: Color,
+    descriptionColor: Color, titleFontSize: TextUnit,
+    descriptionFontSize: TextUnit, titleFontFamily: FontFamily,
+    descriptionFontFamily: FontFamily
 ) {
-    Column(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(0.dp,36.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier
+            .wrapContentHeight()
+            .fillMaxWidth()
+            .padding(MaterialTheme.spacing.view_9x),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = title, color = titleColor,
             fontFamily = titleFontFamily,
@@ -28,7 +36,7 @@ fun TitleAndContent(title: String, description: String, titleColor: Color,
         )
 
         Text(
-            modifier = Modifier.padding(0.dp, 24.dp, 0.dp, 0.dp),
+            modifier = Modifier.padding(top = MaterialTheme.spacing.view_6x),
             text = description, color = descriptionColor,
             fontFamily = descriptionFontFamily,
             fontSize = descriptionFontSize,

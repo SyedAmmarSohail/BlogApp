@@ -38,7 +38,7 @@
     <string name="recent">Recent</string>
     <string name="kcal_per_100g">%dkcal / 100g</string>
     <string name="track">Track</string>
-    <string name="error_something_went_wrong">Oops, something went wrong!</string>
+    <string name="error_something_went_wrong">Failed to fetch the blogs</string>
     <string name="no_results">No results</string>
     <string name="error_invalid_values">These are not valid values</string>
     <string name="what_are_your_nutrient_goals">What are your nutrient goals?</string>

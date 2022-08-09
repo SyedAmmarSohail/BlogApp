@@ -3,7 +3,9 @@ package com.structure.core_ui
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -36,10 +38,17 @@ data class Dimensions(
     val view_22x: Dp = 88.dp,
     val view_23x: Dp = 92.dp,
     val view_24x: Dp = 96.dp,
-    val view_25x: Dp = 100.dp
+    val view_25x: Dp = 100.dp,
+    val view_30x: Dp = 120.dp,
+    val view_50x: Dp = 120.dp
 )
 
 val LocalSpacing = compositionLocalOf { Dimensions() }
+
+val MaterialTheme.spacing: Dimensions
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalSpacing.current
 
 @Composable
 fun spacerHeight(height : Dp) = Spacer(modifier = Modifier.height(height))

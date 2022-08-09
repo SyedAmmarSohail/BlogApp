@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.sp
 import com.structure.core_ui.DarkGray
 import com.structure.core_ui.LightGray
 
-data class OnboardingProperties (
+data class OnBoardingProperties (
     var buttonColor: Color = DarkGray,
     var selectedDotColor: Color = Color.DarkGray,
     var unselectedDotColor: Color = LightGray,

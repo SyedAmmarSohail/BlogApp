@@ -27,26 +27,6 @@ class BlogRepositoryFake : BlogRepository {
     private val getBlogsFlow =
         MutableSharedFlow<List<BlogModel>>(replay = 1)
 
-    override suspend fun searchFood(
-        query: String,
-        page: Int,
-        pageSize: Int
-    ): Result<List<TrackableFood>> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun insertTrackedFood(food: TrackedFood) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteTrackedFood(food: TrackedFood) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>> {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getBlog(): Result<List<BlogModel>> {
         return if (shouldReturnError) {
             Result.failure(Throwable())
