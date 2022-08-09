@@ -2,8 +2,8 @@ package com.structure.blog_data.di
 
 import android.app.Application
 import androidx.room.Room
-import com.structure.blog_data.local.TrackerDatabase
-import com.structure.blog_data.remote.OpenFoodApi
+import com.structure.blog_data.local.BlogDatabase
+import com.structure.blog_data.remote.BlogApi
 import com.structure.blog_data.repository.BlogRepositoryImpl
 import com.structure.blog_domain.repository.BlogRepository
 import dagger.Module
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TrackerDataModule {
+object BlogDataModule {
 
     @Provides
     @Singleton
@@ -35,9 +35,9 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideOpenFoodApi(client: OkHttpClient): OpenFoodApi {
+    fun provideOpenFoodApi(client: OkHttpClient): BlogApi {
         return Retrofit.Builder()
-            .baseUrl(OpenFoodApi.BASE_URL)
+            .baseUrl(BlogApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
@@ -46,19 +46,19 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideTrackerDatabase(app: Application): TrackerDatabase {
+    fun provideTrackerDatabase(app: Application): BlogDatabase {
         return Room.databaseBuilder(
             app,
-            TrackerDatabase::class.java,
+            BlogDatabase::class.java,
             "tracker_db"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideTrackerRepository(
-        api: OpenFoodApi,
-        db: TrackerDatabase
+    fun provideBlogRepository(
+        api: BlogApi,
+        db: BlogDatabase
     ): BlogRepository {
         return BlogRepositoryImpl(
             dao = db.dao,

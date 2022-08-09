@@ -40,7 +40,7 @@ fun BlogTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable()
     } else {
         LightColorPalette
     }
-    CompositionLocalProvider(LocalSpacing provides Dimensions()) {
+    CompositionLocalProvider(LocalSpacing provides Dimensions(), LocalFontSize provides FontSize()) {
         MaterialTheme(
             colors = colors,
             typography = Typography,

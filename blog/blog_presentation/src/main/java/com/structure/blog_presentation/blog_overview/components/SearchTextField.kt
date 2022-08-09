@@ -82,7 +82,7 @@ fun SearchTextField(
                     fontWeight = FontWeight.Light,
                     color = iconTintColor,
                     modifier = Modifier
-                        .padding(start = spacing.spaceMedium)
+                        .padding(start = spacing.view_4x)
                 )
             }
         }

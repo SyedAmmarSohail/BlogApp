@@ -17,29 +17,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
-import com.structure.onboarding_presentation.onboarding.OnBoardingScreen
-import com.structure.onboarding_presentation.onboarding.properties.OnboardingProperties
 import com.structure.blog.ui.theme.BlogTheme
 import com.structure.core.domain.preferences.Preferences
 import com.structure.blog.navigation.Route
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_detail.BlogDetailScreen
-import com.structure.blog_presentation.blog_overview.Blog
 import com.structure.blog_presentation.blog_overview.BlogOverviewScreen
-import com.structure.onboarding_presentation.activity.ActivityScreen
-import com.structure.onboarding_presentation.age.AgeScreen
-import com.structure.onboarding_presentation.gender.GenderScreen
-import com.structure.onboarding_presentation.goal.GoalScreen
-import com.structure.onboarding_presentation.height.HeightScreen
-import com.structure.onboarding_presentation.nutrient_goal.NutrientGoalScreen
-import com.structure.onboarding_presentation.weight.WeightScreen
-import com.structure.onboarding_presentation.welcome.WelcomeScreen
-import com.structure.blog_presentation.search.SearchScreen
 import com.structure.core.domain.model.BlogType
 import com.structure.core_ui.DarkGray
 import com.structure.core_ui.Purple
+import com.structure.onboarding_presentation.onboarding.OnBoardingScreen
 import com.structure.onboarding_presentation.onboarding.descriptionList
 import com.structure.onboarding_presentation.onboarding.imageIdList
+import com.structure.onboarding_presentation.onboarding.properties.OnboardingProperties
 import com.structure.onboarding_presentation.onboarding.titleList
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
@@ -69,13 +59,8 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = if (shouldShowOnboarding) {
                             Route.ON_BOARDING
-                        } else Route.TRACKER_OVERVIEW
+                        } else Route.BLOG_OVERVIEW
                     ) {
-                        composable(Route.WELCOME) {
-                            WelcomeScreen(onNextClick = {
-                                navController.navigate(Route.GENDER)
-                            })
-                        }
                         composable(Route.ON_BOARDING) {
                             OnBoardingScreen(
                                 imageIdList = imageIdList,
@@ -97,54 +82,6 @@ class MainActivity : ComponentActivity() {
                                 )
                             )
                         }
-                        composable(Route.AGE) {
-                            AgeScreen(
-                                scaffoldState = scaffoldState,
-                                onNextClick = {
-                                    navController.navigate(Route.HEIGHT)
-                                }
-                            )
-                        }
-                        composable(Route.GENDER) {
-                            GenderScreen(onNextClick = {
-                                navController.navigate(Route.AGE)
-                            })
-                        }
-                        composable(Route.HEIGHT) {
-                            HeightScreen(
-                                scaffoldState = scaffoldState,
-                                onNextClick = {
-                                    navController.navigate(Route.WEIGHT)
-                                }
-                            )
-                        }
-                        composable(Route.WEIGHT) {
-                            WeightScreen(
-                                scaffoldState = scaffoldState,
-                                onNextClick = {
-                                    navController.navigate(Route.ACTIVITY)
-                                }
-                            )
-                        }
-                        composable(Route.NUTRIENT_GOAL) {
-                            NutrientGoalScreen(
-                                scaffoldState = scaffoldState,
-                                onNextClick = {
-                                    navController.navigate(Route.TRACKER_OVERVIEW)
-                                }
-                            )
-                        }
-                        composable(Route.ACTIVITY) {
-                            ActivityScreen(onNextClick = {
-                                navController.navigate(Route.GOAL)
-                            })
-                        }
-                        composable(Route.GOAL) {
-                            GoalScreen(onNextClick = {
-                                navController.navigate(Route.NUTRIENT_GOAL)
-                            })
-                        }
-
                         composable(Route.BLOG_OVERVIEW) {
                             BlogOverviewScreen(
                                 onNavigateToDetail = { blog ->
@@ -158,51 +95,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             )
-//                            BlogDetailScreen(blogList[0])
-//                        TrackerOverviewScreen(
-//                                onNavigateToSearch = { mealName, day, month, year ->
-//                                    navController.navigate(
-//                                        Route.SEARCH + "/$mealName" +
-//                                                "/$day" +
-//                                                "/$month" +
-//                                                "/$year"
-//                                    )
-//                                }
-//                            )
                         }
-                        composable(
-                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
-                            arguments = listOf(
-                                navArgument("mealName") {
-                                    type = NavType.StringType
-                                },
-                                navArgument("dayOfMonth") {
-                                    type = NavType.IntType
-                                },
-                                navArgument("month") {
-                                    type = NavType.IntType
-                                },
-                                navArgument("year") {
-                                    type = NavType.IntType
-                                },
-                            )
-                        ) {
-                            val mealName = it.arguments?.getString("mealName")!!
-                            val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
-                            val month = it.arguments?.getInt("month")!!
-                            val year = it.arguments?.getInt("year")!!
-                            SearchScreen(
-                                scaffoldState = scaffoldState,
-                                mealName = mealName,
-                                dayOfMonth = dayOfMonth,
-                                month = month,
-                                year = year,
-                                onNavigateUp = {
-                                    navController.navigateUp()
-                                }
-                            )
-                        }
-
                         composable(
                             route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogImage}/{blogDate}",
                             arguments = listOf(

@@ -11,20 +11,15 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-object TrackerDomainModule {
+object BlogDomainModule {
 
     @ViewModelScoped
     @Provides
-    fun provideTrackerUseCases(
+    fun provideBlogUseCases(
         repository: BlogRepository,
         preferences: Preferences
     ): TrackerUseCases {
         return TrackerUseCases(
-            trackFood = TrackFood(repository),
-            searchFood = SearchFood(repository),
-            getFoodsForDate = GetFoodsForDate(repository),
-            deleteTrackedFood = DeleteTrackedFood(repository),
-            calculateMealNutrients = CalculateMealNutrients(preferences),
             getBlog = GetBlog(repository),
             searchBlog = SearchBlog(repository),
             storeBlogs = StoreBlogs(repository)

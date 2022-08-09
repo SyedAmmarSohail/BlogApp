@@ -1,7 +1,7 @@
 package com.structure.blog_data.repository
 
 import com.google.common.truth.Truth.assertThat
-import com.structure.blog_data.remote.OpenFoodApi
+import com.structure.blog_data.remote.BlogApi
 import com.structure.blog_data.remote.dto.Article
 import com.structure.blog_data.remote.dto.BlogDto
 import com.structure.core.domain.model.BlogType
@@ -23,7 +23,7 @@ class BlogRepositoryImplTest {
     private lateinit var repository: BlogRepositoryImpl
 
     @Mock
-    private lateinit var service: OpenFoodApi
+    private lateinit var service: BlogApi
 
     @Before
     fun setUp() {

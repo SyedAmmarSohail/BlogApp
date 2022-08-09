@@ -14,17 +14,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.annotation.ExperimentalCoilApi
-import com.google.common.truth.Truth.assertThat
 import com.structure.blog.navigation.Route
 import com.structure.blog.repository.BlogRepositoryFake
 import com.structure.blog.ui.theme.BlogTheme
-import com.structure.core.domain.model.ActivityLevel
-import com.structure.core.domain.model.Gender
-import com.structure.core.domain.model.GoalType
-import com.structure.core.domain.model.UserInfo
 import com.structure.core.domain.preferences.Preferences
 import com.structure.core.domain.use_case.FilterOutDigits
-import com.structure.blog_domain.model.TrackableFood
 import com.structure.blog_domain.use_case.*
 import com.structure.blog_presentation.search.SearchScreen
 import com.structure.blog_presentation.search.SearchViewModel
@@ -32,13 +26,10 @@ import com.structure.blog_presentation.tracker_overview.TrackerOverviewScreen
 import com.structure.blog_presentation.tracker_overview.TrackerOverviewViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import io.mockk.InternalPlatformDsl.toStr
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
-import kotlin.math.roundToInt
 
 @ExperimentalComposeUiApi
 @ExperimentalCoilApi

@@ -1,8 +1,6 @@
 package com.structure.blog.repository
 
 import com.structure.blog_domain.model.BlogModel
-import com.structure.blog_domain.model.TrackableFood
-import com.structure.blog_domain.model.TrackedFood
 import com.structure.blog_domain.repository.BlogRepository
 import com.structure.core.domain.model.BlogType
 import kotlinx.coroutines.flow.Flow
