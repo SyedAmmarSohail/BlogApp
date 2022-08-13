@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
@@ -77,8 +78,8 @@ class MainActivity : ComponentActivity() {
                                     descriptionFontSize = 16.sp,
                                     titleFontFamily = FontFamily.Default,
                                     descriptionFontFamily = FontFamily.Default,
-                                    skipButtonName = "Skip",
-                                    nextButtonName = "Next"
+                                    skipButtonName = stringResource(id = R.string.skip),
+                                    nextButtonName = stringResource(id = R.string.next)
                                 )
                             )
                         }

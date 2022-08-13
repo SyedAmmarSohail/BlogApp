@@ -28,12 +28,14 @@ import kotlinx.coroutines.launch
 import com.structure.core.R
 import com.structure.core.util.UiEvent
 import com.structure.core_ui.*
+import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
 
 @OptIn(
     ExperimentalMaterialApi::class, ExperimentalPagerApi::class,
-    androidx.compose.ui.ExperimentalComposeUiApi::class
+    androidx.compose.ui.ExperimentalComposeUiApi::class,
+    kotlinx.coroutines.InternalCoroutinesApi::class
 )
 @Composable
 fun BlogOverviewScreen(
@@ -45,16 +47,24 @@ fun BlogOverviewScreen(
     val state = viewModel.state
     val context = LocalContext.current
 
+    val scope = rememberCoroutineScope()
+
     val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = keyboardController) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ShowToast -> {
-                    Toast.makeText(context, event.message.asString(context), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, event.message.asString(context), Toast.LENGTH_SHORT)
+                        .show()
                     keyboardController?.hide()
                 }
                 else -> Unit
             }
+        }
+    }
+    LaunchedEffect(pagerState) {
+        // Collect from the a snapshotFlow reading the currentPage
+        snapshotFlow { pagerState.currentPage }.collectLatest { page ->
         }
     }
 
@@ -93,7 +103,7 @@ fun TopBar(viewModel: BlogOverviewViewModel) {
 //                TODO("tap on search")
             },
             onFocusChanged = {
-            viewModel.onEvent(BlogOverViewEvent.OnSearchFocusedChanged(it.isFocused))
+                viewModel.onEvent(BlogOverViewEvent.OnSearchFocusedChanged(it.isFocused))
             }
         )
     }
@@ -142,7 +152,12 @@ fun TabsContent(
     onNavigateToDetail: (BlogModel) -> Unit,
     state: BlogOverviewState
 ) {
-    HorizontalPager(state = pagerState, count = tabs.size) { page ->
+    HorizontalPager(
+        state = pagerState,
+        count = tabs.size,
+        modifier = Modifier.fillMaxSize(),
+        userScrollEnabled = false
+    ) { page ->
         tabs[page].screen(state) {
             onNavigateToDetail(it)
         }

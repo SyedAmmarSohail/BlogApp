@@ -77,7 +77,7 @@ class BlogOverviewViewModel @Inject constructor(
                 state = state.copy(blogs = emptyList(), isSearching = false)
                 _uiEvent.send(
                     UiEvent.ShowToast(
-                        UiText.StringResource(R.string.error_something_went_wrong)
+                        UiText.StringResource(R.string.error)
                     )
                 )
             }
