@@ -32,6 +32,7 @@ import com.structure.onboarding_presentation.onboarding.descriptionList
 import com.structure.onboarding_presentation.onboarding.imageIdList
 import com.structure.onboarding_presentation.onboarding.properties.OnBoardingProperties
 import com.structure.onboarding_presentation.onboarding.titleList
+import com.structure.profile_presentation.profile.ProfileScreen
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -91,9 +92,17 @@ class MainActivity : ComponentActivity() {
                                                 "/${blog.title}" +
                                                 "/${blog.description}" +
                                                 "/${blog.type.name}" +
-                                                "/${URLEncoder.encode(blog.imageUrl, StandardCharsets.UTF_8.toString())}" +
+                                                "/${
+                                                    URLEncoder.encode(
+                                                        blog.imageUrl,
+                                                        StandardCharsets.UTF_8.toString()
+                                                    )
+                                                }" +
                                                 "/${blog.date}"
                                     )
+                                },
+                                onNavigateToProfile = {
+                                    navController.navigate(Route.PROFILE)
                                 }
                             )
                         }
@@ -135,6 +144,14 @@ class MainActivity : ComponentActivity() {
                                     type = BlogType.valueOf(blogType),
                                     date = blogDate,
                                 ),
+                                onNavigateUp = {
+                                    navController.navigateUp()
+                                }
+                            )
+                        }
+
+                        composable(Route.PROFILE) {
+                            ProfileScreen(
                                 onNavigateUp = {
                                     navController.navigateUp()
                                 }

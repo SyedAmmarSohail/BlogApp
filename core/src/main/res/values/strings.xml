@@ -3,5 +3,6 @@
     <string name="next">Next</string>
     <string name="skip">Skip</string>
     <string name="error">Something went wrong</string>
-    <string name="search">Search...</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -67,6 +67,7 @@ dependencies {
     implementation(project(Modules.blogPresentation))
     implementation(project(Modules.blogDomain))
     implementation(project(Modules.blogData))
+    implementation(project(Modules.profilePresentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

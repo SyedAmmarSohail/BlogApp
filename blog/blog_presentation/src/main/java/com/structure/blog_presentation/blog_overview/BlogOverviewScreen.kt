@@ -3,6 +3,7 @@ package com.structure.blog_presentation.blog_overview
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,6 +41,7 @@ import java.util.*
 @Composable
 fun BlogOverviewScreen(
     onNavigateToDetail: (BlogModel) -> Unit,
+    onNavigateToProfile: () -> Unit,
     viewModel: BlogOverviewViewModel = hiltViewModel()
 ) {
     val tabs = listOf(TabItem.Feature, TabItem.Latest, TabItem.Trending)
@@ -69,7 +71,7 @@ fun BlogOverviewScreen(
     }
 
     Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.view_4x)) {
-        TopBar(viewModel)
+        TopBar(viewModel, onNavigateToProfile)
         spacerHeight(height = MaterialTheme.spacing.view_4x)
         Tabs(tabs = tabs, pagerState = pagerState, viewModel)
         TabsContent(tabs = tabs, pagerState = pagerState, onNavigateToDetail, state)
@@ -77,13 +79,16 @@ fun BlogOverviewScreen(
 }
 
 @Composable
-fun TopBar(viewModel: BlogOverviewViewModel) {
+fun TopBar(viewModel: BlogOverviewViewModel, onNavigateToProfile: () -> Unit) {
     var text by rememberSaveable { mutableStateOf("") }
     Column(modifier = Modifier.padding(top = MaterialTheme.spacing.view_4x)) {
         Image(
             painter = painterResource(id = R.drawable.ninja),
             contentDescription = null,
             modifier = Modifier
+                .clickable {
+                    onNavigateToProfile()
+                }
                 .align(Alignment.End)
                 .clip(CircleShape)
                 .size(MaterialTheme.spacing.view_8x),

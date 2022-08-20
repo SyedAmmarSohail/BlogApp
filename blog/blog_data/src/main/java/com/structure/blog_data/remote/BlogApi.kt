@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface BlogApi {
 
-    @GET("v3/b0b5d515-e4f5-42ca-b424-5ccfff2e2083")
+    @GET("v3/eb012692-6a06-456d-ba85-03b84c9085ec")
     suspend fun getBlogs(
     ): Response<BlogDto>
 
