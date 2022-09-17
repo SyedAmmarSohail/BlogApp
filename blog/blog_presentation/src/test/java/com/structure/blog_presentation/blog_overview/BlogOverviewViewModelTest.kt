@@ -55,35 +55,6 @@ class BlogOverviewViewModelTest {
     }
 
     @Test
-    fun `get blogs success`() = runTest {
-
-        coEvery { blogUseCases.getBlog() } returns Result.success(testBlogList)
-        viewModel = BlogOverviewViewModel(
-            blogUseCases = blogUseCases,
-            preferences = preferences
-        )
-//        advanceUntilIdle()
-        advanceTimeBy(2000)
-        assertThat(true).isEqualTo(viewModel.state.isSearching)
-
-        coVerify { blogUseCases.getBlog() }
-        if (!viewModel.state.isSearching) {
-            assertThat(testBlogList).isEqualTo(viewModel.state.blogs)
-        }
-    }
-
-    @Test
-    fun `get blogs failure`(): Unit = runBlocking {
-        coEvery { blogUseCases.getBlog() } returns Result.failure(Exception("Service Failed"))
-
-        viewModel = BlogOverviewViewModel(
-            blogUseCases = blogUseCases,
-            preferences = preferences
-        )
-        assertThat(emptyList<BlogModel>()).isEqualTo(viewModel.state.blogs)
-    }
-
-    @Test
     fun `get blogs with Type`(): Unit = runBlocking {
         val flowTest = flow<List<BlogModel>> {
             emit(testBlogList)
