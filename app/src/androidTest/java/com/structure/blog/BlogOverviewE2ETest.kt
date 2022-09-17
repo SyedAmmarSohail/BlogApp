@@ -23,7 +23,6 @@ import com.structure.blog_domain.use_case.*
 import com.structure.blog_presentation.blog_detail.BlogDetailScreen
 import com.structure.blog_presentation.blog_overview.BlogOverviewScreen
 import com.structure.blog_presentation.blog_overview.BlogOverviewViewModel
-import com.structure.blog_presentation.search.SearchScreen
 import com.structure.core.domain.model.BlogType
 import com.structure.core.domain.preferences.Preferences
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -49,7 +48,7 @@ class BlogOverviewE2ETest {
     private lateinit var blogRepositoryFake: BlogRepositoryFake
     private lateinit var preferences: Preferences
     private lateinit var blogOverviewViewModel: BlogOverviewViewModel
-    private lateinit var trackerUseCases: TrackerUseCases
+    private lateinit var blogUseCases: BlogUseCases
     private lateinit var navController: NavHostController
 
 
@@ -57,18 +56,13 @@ class BlogOverviewE2ETest {
     fun setup() {
         preferences = mockk(relaxed = true)
         blogRepositoryFake = BlogRepositoryFake()
-        trackerUseCases = TrackerUseCases(
-            trackFood = TrackFood(blogRepositoryFake),
-            searchFood = SearchFood(blogRepositoryFake),
-            getFoodsForDate = GetFoodsForDate(blogRepositoryFake),
-            deleteTrackedFood = DeleteTrackedFood(blogRepositoryFake),
-            calculateMealNutrients = CalculateMealNutrients(preferences),
+        blogUseCases = BlogUseCases(
             getBlog = GetBlog(blogRepositoryFake),
             searchBlog = SearchBlog(blogRepositoryFake),
             storeBlogs = StoreBlogs(blogRepositoryFake)
         )
         blogOverviewViewModel = BlogOverviewViewModel(
-            trackerUseCases = trackerUseCases,
+            blogUseCases = blogUseCases,
             preferences = preferences
         )
 
@@ -82,10 +76,10 @@ class BlogOverviewE2ETest {
                 ) {
                     NavHost(
                         navController = navController,
-                        startDestination = Route.TRACKER_OVERVIEW
+                        startDestination = Route.BLOG_OVERVIEW
                     ) {
 
-                        composable(Route.TRACKER_OVERVIEW) {
+                        composable(Route.BLOG_OVERVIEW) {
                             BlogOverviewScreen(
                                 onNavigateToDetail = { blog ->
                                     navController.navigate(
@@ -102,38 +96,9 @@ class BlogOverviewE2ETest {
                                                 "/${blog.date}"
                                     )
                                 },
-                                viewModel = blogOverviewViewModel
-                            )
-                        }
-                        composable(
-                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
-                            arguments = listOf(
-                                navArgument("mealName") {
-                                    type = NavType.StringType
-                                },
-                                navArgument("dayOfMonth") {
-                                    type = NavType.IntType
-                                },
-                                navArgument("month") {
-                                    type = NavType.IntType
-                                },
-                                navArgument("year") {
-                                    type = NavType.IntType
-                                },
-                            )
-                        ) {
-                            val mealName = it.arguments?.getString("mealName")!!
-                            val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
-                            val month = it.arguments?.getInt("month")!!
-                            val year = it.arguments?.getInt("year")!!
-                            SearchScreen(
-                                scaffoldState = scaffoldState,
-                                mealName = mealName,
-                                dayOfMonth = dayOfMonth,
-                                month = month,
-                                year = year,
-                                onNavigateUp = {
-                                    navController.navigateUp()
+                                viewModel = blogOverviewViewModel,
+                                onNavigateToProfile = {
+                                    navController.navigate(Route.PROFILE)
                                 }
                             )
                         }
@@ -189,7 +154,7 @@ class BlogOverviewE2ETest {
     }
 
     @Test
-    fun `click_blog_item_to_navigate_detail_page`(){
+    fun `click_blog_item_to_navigate_detail_page`() {
         blogRepositoryFake.resultList = listOf(
             BlogModel(
                 id = "id",

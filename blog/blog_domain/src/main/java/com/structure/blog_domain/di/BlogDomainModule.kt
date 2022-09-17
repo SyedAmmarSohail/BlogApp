@@ -18,8 +18,8 @@ object BlogDomainModule {
     fun provideBlogUseCases(
         repository: BlogRepository,
         preferences: Preferences
-    ): TrackerUseCases {
-        return TrackerUseCases(
+    ): BlogUseCases {
+        return BlogUseCases(
             getBlog = GetBlog(repository),
             searchBlog = SearchBlog(repository),
             storeBlogs = StoreBlogs(repository)

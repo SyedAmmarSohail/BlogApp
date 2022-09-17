@@ -17,7 +17,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Meditation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Blog.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.Meditation.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Blog.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

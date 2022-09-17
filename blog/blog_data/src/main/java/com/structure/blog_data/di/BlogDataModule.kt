@@ -35,7 +35,7 @@ object BlogDataModule {
 
     @Provides
     @Singleton
-    fun provideOpenFoodApi(client: OkHttpClient): BlogApi {
+    fun provideBlogApi(client: OkHttpClient): BlogApi {
         return Retrofit.Builder()
             .baseUrl(BlogApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
@@ -46,11 +46,11 @@ object BlogDataModule {
 
     @Provides
     @Singleton
-    fun provideTrackerDatabase(app: Application): BlogDatabase {
+    fun provideBlogDatabase(app: Application): BlogDatabase {
         return Room.databaseBuilder(
             app,
             BlogDatabase::class.java,
-            "tracker_db"
+            BlogDatabase::class.java.simpleName
         ).build()
     }
 

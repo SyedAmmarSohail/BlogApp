@@ -3,6 +3,7 @@ package com.structure.blog.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import com.structure.core.Constants.SHARED_PREFERENCE
 import com.structure.core.data.preferences.DefaultPreferences
 import com.structure.core.domain.preferences.Preferences
 import dagger.Module
@@ -20,7 +21,7 @@ object AppModule {
     fun provideSharedPreferences(
         app: Application
     ): SharedPreferences {
-        return app.getSharedPreferences("shared_pref", MODE_PRIVATE)
+        return app.getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE)
     }
 
     @Provides

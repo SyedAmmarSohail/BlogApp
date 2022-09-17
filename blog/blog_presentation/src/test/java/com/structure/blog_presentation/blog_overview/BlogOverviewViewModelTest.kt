@@ -1,5 +1,6 @@
 package com.structure.blog_presentation.blog_overview
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.repository.BlogRepository
@@ -7,64 +8,76 @@ import com.structure.blog_domain.use_case.*
 import com.structure.blog_presentation.factory.testBlogList
 import com.structure.core.domain.model.BlogType
 import com.structure.core.domain.preferences.Preferences
-import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.setMain
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.kotlin.whenever
 import com.google.common.truth.Truth.assertThat
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.*
+import org.junit.After
+import org.junit.Rule
 
+@ExperimentalCoroutinesApi
 class BlogOverviewViewModelTest {
 
-    private lateinit var preferences: Preferences
-    private lateinit var trackerUseCases: TrackerUseCases
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
+
+    private lateinit var blogUseCases: BlogUseCases
     private lateinit var viewModel: BlogOverviewViewModel
 
-    @Mock
+    @MockK
+    private lateinit var preferences: Preferences
+
+    @MockK
     private lateinit var repository: BlogRepository
 
     @Before
     fun setUp() {
         Dispatchers.setMain(Dispatchers.Unconfined)
-        MockitoAnnotations.openMocks(this)
-        preferences = mockk(relaxed = true)
-        trackerUseCases = TrackerUseCases(
-            trackFood = TrackFood(repository),
-            searchFood = SearchFood(repository),
-            getFoodsForDate = GetFoodsForDate(repository),
-            deleteTrackedFood = DeleteTrackedFood(repository),
-            calculateMealNutrients = CalculateMealNutrients(preferences),
+        MockKAnnotations.init(this, relaxed = true)
+        blogUseCases = BlogUseCases(
             getBlog = GetBlog(repository),
             searchBlog = SearchBlog(repository),
             storeBlogs = StoreBlogs(repository)
         )
     }
 
-    @Test
-    fun `get blogs success`(): Unit = runBlocking {
-        whenever(trackerUseCases.getBlog()).thenReturn(Result.success(testBlogList))
+    @After
+    fun tearDown(){
+        unmockkAll()
+        Dispatchers.resetMain()
+    }
 
+    @Test
+    fun `get blogs success`() = runTest {
+
+        coEvery { blogUseCases.getBlog() } returns Result.success(testBlogList)
         viewModel = BlogOverviewViewModel(
-            trackerUseCases = trackerUseCases,
+            blogUseCases = blogUseCases,
             preferences = preferences
         )
+//        advanceUntilIdle()
+        advanceTimeBy(2000)
+        assertThat(true).isEqualTo(viewModel.state.isSearching)
 
-        assertThat(testBlogList).isEqualTo(viewModel.state.blogs)
-        assertEquals(testBlogList, viewModel.state.blogs)
+        coVerify { blogUseCases.getBlog() }
+        if (!viewModel.state.isSearching) {
+            assertThat(testBlogList).isEqualTo(viewModel.state.blogs)
+        }
     }
 
     @Test
     fun `get blogs failure`(): Unit = runBlocking {
-        whenever(trackerUseCases.getBlog()).thenReturn(Result.failure(Exception("Service Failed")))
+        coEvery { blogUseCases.getBlog() } returns Result.failure(Exception("Service Failed"))
 
         viewModel = BlogOverviewViewModel(
-            trackerUseCases = trackerUseCases,
+            blogUseCases = blogUseCases,
             preferences = preferences
         )
         assertThat(emptyList<BlogModel>()).isEqualTo(viewModel.state.blogs)
@@ -76,16 +89,16 @@ class BlogOverviewViewModelTest {
             emit(testBlogList)
         }
 
-        whenever(trackerUseCases.searchBlog(BlogType.valueOf("FEATURED"))).thenReturn(flowTest)
+        coEvery { blogUseCases.searchBlog(BlogType.valueOf("FEATURED")) } returns flowTest
 
         viewModel = BlogOverviewViewModel(
-            trackerUseCases = trackerUseCases,
+            blogUseCases = blogUseCases,
             preferences = preferences
         )
 
         viewModel.onEvent(BlogOverViewEvent.OnTabClick("FEATURED"))
 
-        trackerUseCases.searchBlog(BlogType.valueOf("FEATURED")).test {
+        blogUseCases.searchBlog(BlogType.valueOf("FEATURED")).test {
 
             assertThat(testBlogList).isEqualTo(awaitItem())
             cancelAndConsumeRemainingEvents()

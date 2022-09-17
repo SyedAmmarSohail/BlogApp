@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.structure.blog_domain.use_case.TrackerUseCases
+import com.structure.blog_domain.use_case.BlogUseCases
 import com.structure.blog_presentation.R
 import com.structure.core.domain.model.BlogType
 import com.structure.core.domain.preferences.Preferences
@@ -21,12 +21,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BlogOverviewViewModel @Inject constructor(
-    private val trackerUseCases: TrackerUseCases,
+    private val blogUseCases: BlogUseCases,
     preferences: Preferences
 ) : ViewModel() {
 
-
-    var state by mutableStateOf(BlogOverviewState())
+    var state by mutableStateOf(BlogOverviewState(isSearching = true, blogs = dummyBlogList))
         private set
 
     private val _uiEvent = Channel<UiEvent>()
@@ -57,20 +56,16 @@ class BlogOverviewViewModel @Inject constructor(
     @OptIn(FlowPreview::class)
     private fun getBlogByType(blogType: BlogType) {
         state = state.copy(blogs = emptyList())
-        trackerUseCases.searchBlog(blogType).onEach { blogs ->
+        blogUseCases.searchBlog(blogType).onEach { blogs ->
             state = state.copy(blogs = blogs)
         }.launchIn(viewModelScope)
     }
 
     private fun getBlogs(blogType: BlogType) {
-        state = state.copy(
-            isSearching = true,
-            blogs = dummyBlogList
-        )
         viewModelScope.launch {
             delay(1000)
-            trackerUseCases.getBlog().onSuccess { blogList ->
-                trackerUseCases.storeBlogs(blogList)
+            blogUseCases.getBlog().onSuccess { blogList ->
+                blogUseCases.storeBlogs(blogList)
                 state =
                     state.copy(blogs = blogList.filter { it.type == blogType }, isSearching = false)
             }.onFailure {

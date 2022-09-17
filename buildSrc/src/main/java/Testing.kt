@@ -34,5 +34,8 @@ object Testing {
     private const val mockitoKotlinVersion = "4.0.0"
     const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
 
+    private const val coreTestingVersion = "2.1.0"
+    const val coreTesting = "androidx.arch.core:core-testing:$coreTestingVersion"
+
 
 }

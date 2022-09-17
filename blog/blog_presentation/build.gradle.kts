@@ -12,7 +12,7 @@ dependencies {
     "implementation"(ViewPager.viewPager)
     "implementation"(ViewPager.viewPagerIndicator)
 
-    "testImplementation"(Testing.mockitoCore)
-    "testImplementation"(Testing.mockitoKotlin)
+//    "testImplementation"(Testing.mockitoCore)
+//    "testImplementation"(Testing.mockitoKotlin)
 
 }

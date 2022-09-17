@@ -24,6 +24,7 @@ import com.structure.core_ui.component.ActionAppBar
 import com.structure.core_ui.component.ComposeVerticalList
 import com.structure.core_ui.component.TextWithIcon
 import com.structure.core.R
+import com.structure.core.extensions.openAppOtherwiseWeb
 
 @Composable
 fun ProfileScreen(
@@ -72,7 +73,7 @@ fun ProfileScreen(
             )
             ComposeVerticalList(list = user.socialLink) { item, index ->
                 TextWithIcon(text = item.name, leadingIcon = item.image, trailingIcon = R.drawable.ic_right_arrow) {
-                    item
+                    context.openAppOtherwiseWeb(item.packageName, item.url)
                 }
             }
         }
