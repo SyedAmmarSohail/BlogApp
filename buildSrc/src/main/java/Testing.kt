@@ -18,24 +18,12 @@ object Testing {
     private const val turbineVersion = "0.7.0"
     const val turbine = "app.cash.turbine:turbine:$turbineVersion"
 
-    private const val mockWebServerVersion = "4.9.3"
-    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
-
     const val composeUiTest = "androidx.compose.ui:ui-test-junit4:${Compose.composeVersion}"
 
     const val hiltTesting = "com.google.dagger:hilt-android-testing:${DaggerHilt.version}"
 
     private const val testRunnerVersion = "1.4.0"
     const val testRunner = "androidx.test:runner:$testRunnerVersion"
-
-    private const val mockitoCoreVersion = "1.4.0"
-    const val mockitoCore = "org.mockito:mockito-core:$mockitoCoreVersion"
-
-    private const val mockitoKotlinVersion = "4.0.0"
-    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
-
-    private const val coreTestingVersion = "2.1.0"
-    const val coreTesting = "androidx.arch.core:core-testing:$coreTestingVersion"
 
 
 }

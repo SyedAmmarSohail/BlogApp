@@ -14,7 +14,4 @@ dependencies {
     "kapt"(Room.roomCompiler)
     "implementation"(Room.roomKtx)
     "implementation"(Room.roomRuntime)
-
-    "testImplementation"(Testing.mockitoCore)
-    "testImplementation"(Testing.mockitoKotlin)
 }
