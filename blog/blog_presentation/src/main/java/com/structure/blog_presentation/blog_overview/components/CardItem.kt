@@ -47,7 +47,7 @@ fun CardItem(
                             crossfade(true)
                             error(com.structure.core.R.drawable.ic_logo)
                             fallback(com.structure.core.R.drawable.ic_logo)
-                            placeholder(R.drawable.ic_logo)
+                            placeholder(com.structure.core.R.drawable.ic_logo)
                         }
                     ),
                     contentDescription = "cardItemImage",

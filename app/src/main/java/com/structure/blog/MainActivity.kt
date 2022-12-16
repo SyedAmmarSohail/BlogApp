@@ -36,6 +36,7 @@ import com.structure.profile_presentation.profile.ProfileScreen
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.time.temporal.TemporalAdjusters.next
 import javax.inject.Inject
 
 @ExperimentalComposeUiApi
@@ -79,19 +80,22 @@ class MainActivity : ComponentActivity() {
                                     descriptionFontSize = 16.sp,
                                     titleFontFamily = FontFamily.Default,
                                     descriptionFontFamily = FontFamily.Default,
-                                    skipButtonName = stringResource(id = R.string.skip),
-                                    nextButtonName = stringResource(id = R.string.next)
+                                    skipButtonName = stringResource(id = com.structure.core.R.string.skip),
+                                    nextButtonName = stringResource(id = com.structure.core.R.string.next)
                                 )
                             )
                         }
                         composable(Route.BLOG_OVERVIEW) {
                             BlogOverviewScreen(
                                 onNavigateToDetail = { blog ->
+                                    val encodedUrl = URLEncoder.encode(blog.link, StandardCharsets.UTF_8.toString())
+
                                     navController.navigate(
                                         Route.DETAIL + "/${blog.id}" +
                                                 "/${blog.title}" +
                                                 "/${blog.description}" +
                                                 "/${blog.type.name}" +
+                                                "/${encodedUrl}" +
                                                 "/${
                                                     URLEncoder.encode(
                                                         blog.imageUrl,
@@ -107,7 +111,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(
-                            route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogImage}/{blogDate}",
+                            route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogLink}/{blogImage}/{blogDate}",
                             arguments = listOf(
                                 navArgument("blogId") {
                                     type = NavType.StringType
@@ -119,6 +123,9 @@ class MainActivity : ComponentActivity() {
                                     type = NavType.StringType
                                 },
                                 navArgument("blogType") {
+                                    type = NavType.StringType
+                                },
+                                navArgument("blogLink") {
                                     type = NavType.StringType
                                 },
                                 navArgument("blogImage") {
@@ -133,6 +140,7 @@ class MainActivity : ComponentActivity() {
                             val blogTitle = it.arguments?.getString("blogTitle")!!
                             val blogDesc = it.arguments?.getString("blogDesc")!!
                             val blogType = it.arguments?.getString("blogType")!!
+                            val blogLink = it.arguments?.getString("blogLink")!!
                             val blogImage = it.arguments?.getString("blogImage")!!
                             val blogDate = it.arguments?.getString("blogDate")!!
                             BlogDetailScreen(
@@ -141,6 +149,7 @@ class MainActivity : ComponentActivity() {
                                     title = blogTitle,
                                     description = blogDesc,
                                     imageUrl = blogImage,
+                                    link = blogLink,
                                     type = BlogType.valueOf(blogType),
                                     date = blogDate,
                                 ),
@@ -156,10 +165,10 @@ class MainActivity : ComponentActivity() {
                                     navController.navigateUp()
                                 }
                             )
+
                         }
                     }
                 }
-
             }
         }
     }

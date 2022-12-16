@@ -35,7 +35,7 @@ fun SearchTextField(
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit,
     modifier: Modifier = Modifier,
-    hint: String = stringResource(id = R.string.search),
+    hint: String = stringResource(id = com.structure.core.R.string.search),
     shouldShowHint: Boolean = false,
     iconTintColor: Color = Gray,
     onFocusChanged: (FocusState) -> Unit
@@ -50,7 +50,7 @@ fun SearchTextField(
         ) {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.search),
+                contentDescription = stringResource(id = com.structure.core.R.string.search),
                 tint = iconTintColor
             )
         }

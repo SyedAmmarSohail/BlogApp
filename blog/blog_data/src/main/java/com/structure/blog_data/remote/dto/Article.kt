@@ -7,6 +7,7 @@ data class Article(
     val title: String,
     val description: String,
     val imageUrl: String,
+    val link: String,
     val type: BlogType,
     val date: String
 )

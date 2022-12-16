@@ -1,6 +1,5 @@
 package com.structure.blog_presentation.blog_overview
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_domain.repository.BlogRepository
@@ -25,8 +24,8 @@ import org.junit.Rule
 @ExperimentalCoroutinesApi
 class BlogOverviewViewModelTest {
 
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+//    @get:Rule
+//    val rule = InstantTaskExecutorRule()
 
     private lateinit var blogUseCases: BlogUseCases
     private lateinit var viewModel: BlogOverviewViewModel

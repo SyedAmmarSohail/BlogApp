@@ -8,6 +8,7 @@ val blogModel = BlogModel(
     "title",
     "description",
     "imageUrl",
+    "link",
     BlogType.FEATURED,
     "date"
 )

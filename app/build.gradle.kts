@@ -45,6 +45,13 @@ android {
         exclude("**/attach_hotspot_windows.dll")
         exclude("META-INF/licenses/ASM")
     }
+    sourceSets {
+        getByName("main") {
+            assets {
+                srcDirs("src/main/assets")
+            }
+        }
+    }
 }
 
 dependencies {

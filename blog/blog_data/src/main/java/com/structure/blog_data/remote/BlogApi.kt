@@ -6,11 +6,11 @@ import retrofit2.http.GET
 
 interface BlogApi {
 
-    @GET("v3/eb012692-6a06-456d-ba85-03b84c9085ec")
+    @GET("get-blogs")
     suspend fun getBlogs(
     ): Response<BlogDto>
 
     companion object {
-        const val BASE_URL = "https://run.mocky.io/"
+        const val BASE_URL = "BASE_URL"
     }
 }

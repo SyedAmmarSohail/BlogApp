@@ -61,7 +61,7 @@ fun BlogDetailScreen(
                 color = DarkGray,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.clickable {
-                    context.openURL("https://medium.com/@ammarsohail321/splashscreen-api-android12-b87d8e7c16c6")
+                    context.openURL(blog.link)
                 }
                     .padding(MaterialTheme.spacing.view_2x)
                     .clip(

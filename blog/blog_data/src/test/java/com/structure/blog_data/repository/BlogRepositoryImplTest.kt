@@ -1,6 +1,9 @@
 package com.structure.blog_data.repository
 
+import android.app.Application
+import android.content.Context
 import com.google.common.truth.Truth.assertThat
+import com.squareup.moshi.Moshi
 import com.structure.blog_data.remote.BlogApi
 import com.structure.blog_data.remote.dto.Article
 import com.structure.blog_data.remote.dto.BlogDto
@@ -24,12 +27,20 @@ class BlogRepositoryImplTest {
     @MockK
     private lateinit var service: BlogApi
 
+    @MockK
+    private lateinit var moshi: Moshi
+
+    @MockK
+    private lateinit var context: Application
+
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
         repository = BlogRepositoryImpl(
             dao = mockk(relaxed = true),
-            api = service
+            api = service,
+            moshi,
+            context
         )
     }
 
@@ -55,8 +66,6 @@ class BlogRepositoryImplTest {
     fun `get blogs, return exception`(): Unit = runBlocking {
         coEvery { service.getBlogs() } throws IOException()
 
-//        doAnswer { throw IOException() }.`when`(service).getBlogs()
-
         val result = repository.getBlog()
 
         assertThat(result.isFailure).isTrue()
@@ -70,7 +79,8 @@ class BlogRepositoryImplTest {
                 "id",
                 title = "title",
                 description = "description",
-                "imageUrl",
+                imageUrl = "imageUrl",
+                link = "link",
                 type = BlogType.FEATURED,
                 date = "date"
             )

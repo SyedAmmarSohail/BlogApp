@@ -11,6 +11,7 @@ fun BlogModel.toBlogEntity(): BlogEntity {
         title = this.title,
         description = this.description,
         image = this.imageUrl,
+        link = this.link,
         type = this.type,
         date = this.date
     )
@@ -22,6 +23,7 @@ fun Article.toBlogModel(): BlogModel {
         this.title,
         this.description,
         this.imageUrl,
+        this.link,
         this.type,
         this.date
     )
@@ -33,6 +35,7 @@ fun BlogEntity.toBlogModel(): BlogModel {
         this.title,
         this.description,
         this.image,
+        this.link,
         this.type,
         this.date
     )
