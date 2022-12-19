@@ -39,12 +39,18 @@
 <!-- Screenshots -->
 ### Screenshots
 
-[<img src="https://drive.google.com/uc?export=view&id=1CM1Xobsz8Hfx4upberVyRDC2tL11sxXF" align="left"
+[<img src="https://drive.google.com/uc?export=view&id=1iVYAJWRPDuFnQ4yjDMLhxRY8HwO7CUa6" align="left"
 width="200"
-    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1CM1Xobsz8Hfx4upberVyRDC2tL11sxXF)
-[<img src="https://drive.google.com/uc?export=view&id=13PnWkxrlz118JPEYviint11a2mZ5TbTc" align="center"
+    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1iVYAJWRPDuFnQ4yjDMLhxRY8HwO7CUa6) 
+[<img src="https://drive.google.com/uc?export=view&id=1nJPKa-znCY86dDAmW2yTtlDx6vxyNK_-" align="center"
 width="200"
-    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=13PnWkxrlz118JPEYviint11a2mZ5TbTc)
+    hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1nJPKa-znCY86dDAmW2yTtlDx6vxyNK_-) 
+[<img src="https://drive.google.com/uc?export=view&id=103t-t7zQM0b3x-Re9bA_nOYWBHpB9UM6" align="center"
+width="200"
+hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=103t-t7zQM0b3x-Re9bA_nOYWBHpB9UM6) 
+[<img src="https://drive.google.com/uc?export=view&id=1JLdr01WIbrKQFxy4jKscXUgzVxj89K_e" align="center"
+width="200"
+hspace="10" vspace="10">](https://drive.google.com/uc?export=view&id=1JLdr01WIbrKQFxy4jKscXUgzVxj89K_e) 
 
 
 <!-- TechStack -->
@@ -99,7 +105,7 @@ Puts every dependencies in one place with respect to its classes, and use it by 
 ### Architecture Diagram
 
 <div align="center"> 
-  <img src="https://drive.google.com/uc?export=view&id=1oG-oo9OEOGlT-hPSv3v52t6U2Jj_7RLN" alt="screenshot" />
+  <img src="https://drive.google.com/uc?export=view&id=1ffusRxcx-fC6Iw-1kRz93cmvrCBD-ehi" alt="screenshot" /> 
 </div>
 
   

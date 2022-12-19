@@ -11,6 +11,6 @@ interface BlogApi {
     ): Response<BlogDto>
 
     companion object {
-        const val BASE_URL = "BASE_URL"
+        const val BASE_URL = "https://BASE_URL"
     }
 }
