@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: io.mockk:mockk-dsl:1.10.0">
+  <library name="Gradle: io.mockk:mockk-dsl:1.10.0" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.mockk/mockk-dsl/1.10.0/aa3b68d98fad6c089078c4053dde5e24c896d2f2/mockk-dsl-1.10.0.jar!/" />
     </CLASSES>

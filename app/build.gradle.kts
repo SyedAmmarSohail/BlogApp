@@ -25,7 +25,7 @@ android {
         create("release") {
             keyAlias = "BlogApp"
             keyPassword = "Blog123123"
-            storeFile = file("/Users/syedammar/Desktop/Work/keystore/blog_keystore")
+            storeFile = file("../blog_keystore")
             storePassword = "Blog123123"
         }
     }
