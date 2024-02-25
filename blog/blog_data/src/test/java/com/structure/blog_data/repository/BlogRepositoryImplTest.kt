@@ -1,7 +1,6 @@
 package com.structure.blog_data.repository
 
 import android.app.Application
-import android.content.Context
 import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
 import com.structure.blog_data.remote.BlogApi
@@ -81,7 +80,7 @@ class BlogRepositoryImplTest {
                 description = "description",
                 imageUrl = "imageUrl",
                 link = "link",
-                type = BlogType.FEATURED,
+                blogType = BlogType.FEATURED.name,
                 date = "date"
             )
         )

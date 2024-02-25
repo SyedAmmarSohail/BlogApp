@@ -34,6 +34,7 @@ android {
 
 dependencies {
     kapt DaggerHilt.hiltCompiler
+    kapt Moshi.moshiCodegen
     implementation DaggerHilt.hiltAndroid
 
     testImplementation Testing.junit4

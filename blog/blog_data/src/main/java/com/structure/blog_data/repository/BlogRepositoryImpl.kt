@@ -1,9 +1,12 @@
 package com.structure.blog_data.repository
 
 import android.app.Application
+import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.structure.blog_data.adapter.FallbackEnum
 import com.structure.blog_data.local.BlogDao
 import com.structure.blog_data.mapper.*
 import com.structure.blog_data.remote.BlogApi
@@ -27,6 +30,7 @@ class BlogRepositoryImpl(
         return try {
             delay(500)
             val blogResponse = readJsonFile("blogs_response.json")
+            Log.d("ReadJson:3: ", blogResponse.toString())
             blogResponse?.let {
                 Result.success(
                     blogResponse.blogs
@@ -46,6 +50,7 @@ class BlogRepositoryImpl(
 //                Result.failure(Exception("Service Failed"))
 //            }
         } catch (e: Exception) {
+            Log.d("ReadJson:Error: ", e.message.toString())
             e.printStackTrace()
             Result.failure(e)
         }
@@ -65,12 +70,14 @@ class BlogRepositoryImpl(
     }
 
     private fun readJsonFile(jsonFile: String): BlogDto? {
+        Log.d("ReadJson:1: ", jsonFile)
         val listType = Types.newParameterizedType(
             BlogDto::class.java, Types.newParameterizedType(
                 List::class.java,
                 Article::class.java,
             )
         )
+        Log.d("ReadJson:2: ", listType.toString())
         val adapter: JsonAdapter<BlogDto> = moshi.adapter(listType)
         val blogJson =
             context.assets.open(jsonFile).bufferedReader()

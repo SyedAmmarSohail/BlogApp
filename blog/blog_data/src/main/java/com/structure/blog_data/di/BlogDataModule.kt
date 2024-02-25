@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.structure.blog_data.adapter.FallbackEnum
 import com.structure.blog_data.local.BlogDatabase
 import com.structure.blog_data.remote.BlogApi
 import com.structure.blog_data.repository.BlogRepositoryImpl
@@ -40,8 +41,8 @@ object BlogDataModule {
     fun provideBlogApi(client: OkHttpClient, moshi: Moshi): BlogApi {
         return Retrofit.Builder()
             .baseUrl(BlogApi.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create()
     }
@@ -60,6 +61,7 @@ object BlogDataModule {
     @Singleton
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
+            .add(FallbackEnum.ADAPTER_FACTORY)
             .add(KotlinJsonAdapterFactory())
             .build()
     }

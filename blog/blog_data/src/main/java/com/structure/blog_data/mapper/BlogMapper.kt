@@ -24,7 +24,7 @@ fun Article.toBlogModel(): BlogModel {
         this.description,
         this.imageUrl,
         this.link,
-        this.type,
+        BlogType.valueOf(this.blogType),
         this.date
     )
 }

@@ -25,7 +25,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import com.structure.core_ui.LocalSpacing
-import com.structure.blog_presentation.R
 import com.structure.core_ui.Gray
 import com.structure.core_ui.spacing
 

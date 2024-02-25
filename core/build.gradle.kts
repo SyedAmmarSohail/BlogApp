@@ -3,5 +3,6 @@ apply {
 }
 
 dependencies {
-
+    "implementation"(Retrofit.moshiConverter)
+    "implementation"(Moshi.moshiKotlin)
 }

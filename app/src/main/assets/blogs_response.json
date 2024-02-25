@@ -3,10 +3,10 @@
     {
       "id": "1",
       "title": "Create UI by Jetpack Compose — Part 1",
-      "description": "In this tutorial I will show you how to create UI by Jetpack Compose, If you are familiar with Flutter then you can easily catch up the UI components, and if not don’t worry I will create it step by step.\n\nFirst of all thanks to Afsar who create this clean UI in Figma.",
+      "description": "In this tutorial I will show you how to create UI by Jetpack Compose, If you are familiar with Flutter then you can easily catch up the UI components, and if not don’t worry I will create it step by step.\nFirst of all thanks to Afsar who create this clean UI in Figma.\nThe main concept in jetpack Compose is Row and Column, if you understand it then you can manage UI easily. In Column, Arrangements are in Column like VerticalArrangement and Alignment are in Row like HorizontalAlignment and in Row is wise versa.\nIf we see the UI, we identify a single Column with multiple Rows.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/white_ninja.jpg?alt=media&token=b6e2a5a4-bd22-4d66-946a-d7cddbb30bed",
       "link": "https://medium.com/bazaar-tech/create-ui-by-jetpack-compose-part-1-1cda793c5449",
-      "type": "FEATURED",
+      "blogType": "FEATURED",
       "date": "Jan 2·3 min read"
     },
     {
@@ -15,7 +15,7 @@
       "description": "In this tutorial I will show you to create the next part of UI, we created the below UI in last part\nNow move to the next part of UI which we says the feature of an app, you see there are two boxes in a row and each box have Title, Image, Time Duration and Button.\nFirst you have to look at the screen and think that it is being solved by row and column. Hmm.. it’s a combination of Box, Row and Column. So it’s a Box on parent and Image, Title and Button is in child like Tree diagram,We see the Image on top right corner, Title and description is in centre of the box and Time and Button are in the bottom. The following code generates the above UI.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/gun_man.jpg?alt=media&token=cbdabb7f-ea9f-4aa3-9aa9-09df8600edc5",
       "link": "https://medium.com/bazaar-tech/create-ui-by-jetpack-compose-part-2-6c9391d831a9",
-      "type": "FEATURED",
+      "blogType": "FEATURED",
       "date": "Jan 2·3 min read"
     },
     {
@@ -24,7 +24,7 @@
       "description": "In this tutorial I will show you the next and final part of the remaining UI which includes how to implement the Nested list and Bottom bar, In last part we developed the below UI\nNow come to the next part of an app which says these are the topics of an app. If we look at the topic section, we find that it is a nested list which is on the column. First we create the item of the topic which is.\nLook at this item. It is a box with text and image inside it, below is the above UI item code.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/pirate.jpg?alt=media&token=c2201b52-28a2-4e03-ae18-9e53f40ef918",
       "link": "https://medium.com/bazaar-tech/create-ui-by-jetpack-compose-part-3-4cb222df3b98",
-      "type": "FEATURED",
+      "blogType": "FEATURED",
       "date": "Jan 2·4 min read"
     },
     {
@@ -33,7 +33,7 @@
       "description": "In most of the cases you have nested list like LazyColumn or LazyVerticalGrid inside another list, but the problem occurs when you scroll the inner list its only scroll in that position which you placed not the whole scrollable screen behaviour.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/ghost.jpg?alt=media&token=1020efb9-ea80-4888-aeb1-4afbfa055141",
       "link": "https://medium.com/bazaar-tech/nested-lazyverticalgrid-with-jetpack-compose-f50d1a8f7e6e",
-      "type": "FEATURED",
+      "blogType": "FEATURED",
       "date": "Jan 2·3 min read"
     },
     {
@@ -42,7 +42,7 @@
       "description": "In this article we see the coding standards, styles, intending and how to work in a team and sync with clean code style which is easily understandable with other team members. In most of the cases other team members are difficult to understand that what the method does, variable purposes etc.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/tablet.jpg?alt=media&token=bde16f3c-d072-448e-826b-809f1cf173ef",
       "link": "https://medium.com/bazaar-tech/coding-rules-and-standards-in-software-development-503c4ae6d39c",
-      "type": "TRENDING",
+      "blogType": "TRENDING",
       "date": "Mar 21·4 min read"
     },
     {
@@ -51,7 +51,7 @@
       "description": "In this article I’ll explain how to migrate your app to Android 12 (API level 31), and i will discuss what issues that i faced while dealing with android 12 so this is completely my recent experience to update an app.\nAccording to Google play target api requirement you will be enforced to update your app target api to 31 before November 2022.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/water_melan.jpg?alt=media&token=c03d9179-85c0-4004-bd0e-7eaf9966183f",
       "link": "https://medium.com/@ammarsohail321/migrate-app-to-android-12-7b094322e973",
-      "type": "LATEST",
+      "blogType": "LATEST",
       "date": "Jun 3·3 min read"
     },
     {
@@ -60,7 +60,7 @@
       "description": "Android 12 introduced a new API for splash screen in which you can easily handle your splash screen as your need.\nBefore we jump into the implementation of it, first let me tell you how we used to make splash screen earlier.\nWe create separate fragment and layout for splash screen and set the time duration which the splash screen shows to users on their first app launch, now we can replace all this splash code with Splash screen API.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/monster.jpg?alt=media&token=344fd290-def1-4172-a197-6be3f2671589",
       "link": "https://medium.com/@ammarsohail321/splashscreen-api-android12-b87d8e7c16c6",
-      "type": "LATEST",
+      "blogType": "LATEST",
       "date": "Jun 12·3 min read"
     },
     {
@@ -69,7 +69,7 @@
       "description": "Test cases plays a major role to avoid crashes of any application. There are multiple categories of test cases. To understand better see the below picture of pyramid.\nThis said which to prefer first and most used test cases. But now a days UI test cases also preferable to avoid UI crashes and strange flow.\nUI test cases are placed in androidTest package because it needs context of the application.",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/blogapp-a96e5.appspot.com/o/kid.jpg?alt=media&token=a9743095-c6c1-494e-a172-225f424f4d89",
       "link": "https://medium.com/bazaar-tech/compose-screen-ui-test-2ad2a1c6b723",
-      "type": "LATEST",
+      "blogType": "LATEST",
       "date": "Jun 12·3 min read"
     }
   ]

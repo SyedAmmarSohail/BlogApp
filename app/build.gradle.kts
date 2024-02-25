@@ -21,11 +21,30 @@ android {
         }
     }
 
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+    signingConfigs {
+        create("release") {
+            keyAlias = "BlogApp"
+            keyPassword = "Blog123123"
+            storeFile = file("/Users/syedammar/Desktop/Work/keystore/blog_keystore")
+            storePassword = "Blog123123"
         }
     }
+
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isDebuggable = false
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.txt")
+        }
+        getByName("debug") {
+            isDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
+    }
+
     buildFeatures {
         compose = true
     }
@@ -67,7 +86,7 @@ dependencies {
 
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
-
+    kapt(Moshi.moshiCodegen)
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.onboardingPresentation))
