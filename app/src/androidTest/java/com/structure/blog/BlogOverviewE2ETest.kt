@@ -93,6 +93,7 @@ class BlogOverviewE2ETest {
                                                         StandardCharsets.UTF_8.toString()
                                                     )
                                                 }" +
+                                                "/${blog.link}" +
                                                 "/${blog.date}"
                                     )
                                 },
@@ -104,7 +105,7 @@ class BlogOverviewE2ETest {
                         }
 
                         composable(
-                            route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogImage}/{blogDate}",
+                            route = Route.DETAIL + "/{blogId}/{blogTitle}/{blogDesc}/{blogType}/{blogImage}/{blogLink}/{blogDate}",
                             arguments = listOf(
                                 navArgument("blogId") {
                                     type = NavType.StringType
@@ -121,6 +122,9 @@ class BlogOverviewE2ETest {
                                 navArgument("blogImage") {
                                     type = NavType.StringType
                                 },
+                                navArgument("blogLink") {
+                                    type = NavType.StringType
+                                },
                                 navArgument("blogDate") {
                                     type = NavType.StringType
                                 },
@@ -131,6 +135,7 @@ class BlogOverviewE2ETest {
                             val blogDesc = it.arguments?.getString("blogDesc")!!
                             val blogType = it.arguments?.getString("blogType")!!
                             val blogImage = it.arguments?.getString("blogImage")!!
+                            val blogLink = it.arguments?.getString("blogLink")!!
                             val blogDate = it.arguments?.getString("blogDate")!!
                             BlogDetailScreen(
                                 BlogModel(
@@ -138,6 +143,7 @@ class BlogOverviewE2ETest {
                                     title = blogTitle,
                                     description = blogDesc,
                                     imageUrl = blogImage,
+                                    link = blogLink,
                                     type = BlogType.valueOf(blogType),
                                     date = blogDate,
                                 ),
@@ -161,6 +167,7 @@ class BlogOverviewE2ETest {
                 title = "title",
                 description = "description",
                 imageUrl = "image-url",
+                link = "link",
                 type = BlogType.FEATURED,
                 date = "date"
             )

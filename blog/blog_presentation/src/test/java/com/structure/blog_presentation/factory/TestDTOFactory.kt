@@ -9,7 +9,8 @@ val testBlogModel = BlogModel(
     description = "description",
     imageUrl = "image-url",
     type = BlogType.FEATURED,
-    date = "date"
+    date = "date",
+    link = ""
 )
 
 val testBlogList = listOf(

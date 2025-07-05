@@ -1,10 +1,10 @@
 package com.structure.onboarding_presentation.onboarding.state
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.ui.graphics.Color
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 data class OnBoardingState constructor(
     var imageId: Int = 0,
     var pagerState: PagerState? = null,

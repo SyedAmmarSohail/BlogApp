@@ -1,5 +1,5 @@
 object ViewPager {
-    const val version = "0.24.1-alpha"
-    const val viewPager = "com.google.accompanist:accompanist-pager:$version"
-    const val viewPagerIndicator =  "com.google.accompanist:accompanist-pager-indicators:$version"
+    private const val version = "1.0.0"
+    const val viewPager = "androidx.compose.foundation:foundation:$version"
+    const val viewPagerIndicator = "androidx.compose.foundation:foundation:$version"
 }

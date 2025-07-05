@@ -1,7 +1,10 @@
 package com.structure.onboarding_presentation.onboarding
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,13 +19,10 @@ import com.structure.onboarding_presentation.onboarding.composables.OnBoardingSc
 import com.structure.onboarding_presentation.onboarding.composables.TitleAndContent
 import com.structure.onboarding_presentation.onboarding.properties.OnBoardingProperties
 import com.structure.onboarding_presentation.onboarding.state.OnBoardingState
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.structure.core_ui.spacing
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class, kotlinx.coroutines.InternalCoroutinesApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen(
     navController: NavController,
@@ -35,7 +35,7 @@ fun OnBoardingScreen(
     properties: OnBoardingProperties,
 ) {
     val state = remember { OnBoardingState() }
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { pageNum })
     val scope = rememberCoroutineScope()
     if (pageNum in 3..5) {
         Box(
@@ -43,7 +43,6 @@ fun OnBoardingScreen(
                 .fillMaxSize(),
         ) {
             HorizontalPager(
-                count = pageNum,
                 state = pagerState,
                 modifier = Modifier.fillMaxHeight(),
             ) { page ->

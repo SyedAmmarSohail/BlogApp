@@ -18,18 +18,19 @@ import com.structure.core.domain.model.BlogType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.lang.reflect.Type
 
 class BlogRepositoryImpl(
     private val dao: BlogDao,
     private val api: BlogApi,
-    private val moshi: Moshi,
-    private val context: Application
+    val moshi: Moshi,
+    val context: Application
 ) : BlogRepository {
 
     override suspend fun getBlog(): Result<List<BlogModel>> {
         return try {
             delay(500)
-            val blogResponse = readJsonFile("blogs_response.json")
+            val blogResponse: BlogDto? = readJsonFile("blogs_response.json")
             Log.d("ReadJson:3: ", blogResponse.toString())
             blogResponse?.let {
                 Result.success(
@@ -69,19 +70,25 @@ class BlogRepositoryImpl(
         }
     }
 
-    private fun readJsonFile(jsonFile: String): BlogDto? {
-        Log.d("ReadJson:1: ", jsonFile)
-        val listType = Types.newParameterizedType(
-            BlogDto::class.java, Types.newParameterizedType(
-                List::class.java,
-                Article::class.java,
-            )
-        )
-        Log.d("ReadJson:2: ", listType.toString())
-        val adapter: JsonAdapter<BlogDto> = moshi.adapter(listType)
-        val blogJson =
-            context.assets.open(jsonFile).bufferedReader()
-                .use { it.readText() }
-        return adapter.fromJson(blogJson)
+//    private fun readJsonFile(jsonFile: String): BlogDto? {
+//        Log.d("ReadJson:1: ", jsonFile)
+//        val listType = Types.newParameterizedType(
+//            BlogDto::class.java, Types.newParameterizedType(
+//                List::class.java,
+//                Article::class.java,
+//            )
+//        )
+//        Log.d("ReadJson:2: ", listType.toString())
+//        val adapter: JsonAdapter<BlogDto> = moshi.adapter(listType)
+//        val blogJson =
+//            context.assets.open(jsonFile).bufferedReader()
+//                .use { it.readText() }
+//        return adapter.fromJson(blogJson)
+//    }
+
+    inline fun <reified T> readJsonFile(jsonFile: String): T? {
+        val adapter = moshi.adapter(T::class.java)
+        val json = context.assets.open(jsonFile).bufferedReader().use { it.readText() }
+        return adapter.fromJson(json)
     }
 }

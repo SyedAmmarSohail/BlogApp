@@ -7,7 +7,7 @@ import com.structure.core.domain.model.BlogType
 /**
  * uncomment below moshi adapter for live api
  * */
-//@JsonClass(generateAdapter = true)
+@JsonClass(generateAdapter = true)
 data class Article(
     @field:Json(name = "id")
     val id: String,
@@ -19,7 +19,7 @@ data class Article(
     val imageUrl: String,
     @field:Json(name = "link")
     val link: String,
-    @field:Json(name = "type")
+    @field:Json(name = "blogType")
     val blogType: String,
     @field:Json(name = "date")
     val date: String

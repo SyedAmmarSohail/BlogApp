@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 /**
  * uncomment below moshi adapter for live api
  * */
-//@JsonClass(generateAdapter = true)
+@JsonClass(generateAdapter = true)
 data class BlogDto(
     @field:Json(name = "blogs")
     val blogs: List<Article>,

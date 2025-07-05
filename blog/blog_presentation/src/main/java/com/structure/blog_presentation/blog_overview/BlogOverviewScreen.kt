@@ -4,7 +4,10 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -19,10 +22,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
 import com.structure.blog_domain.model.BlogModel
 import com.structure.blog_presentation.blog_overview.components.SearchTextField
 import kotlinx.coroutines.launch
@@ -34,7 +33,8 @@ import java.util.*
 
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalPagerApi::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class,
     androidx.compose.ui.ExperimentalComposeUiApi::class,
     kotlinx.coroutines.InternalCoroutinesApi::class
 )
@@ -45,7 +45,7 @@ fun BlogOverviewScreen(
     viewModel: BlogOverviewViewModel = hiltViewModel()
 ) {
     val tabs = listOf(TabItem.Feature, TabItem.Latest, TabItem.Trending)
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { tabs.size })
     val state = viewModel.state
     val context = LocalContext.current
 
@@ -115,9 +115,9 @@ fun TopBar(viewModel: BlogOverviewViewModel, onNavigateToProfile: () -> Unit) {
 }
 
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun Tabs(tabs: List<TabItem>, pagerState: PagerState, viewModel: BlogOverviewViewModel) {
+fun Tabs(tabs: List<TabItem>, pagerState: androidx.compose.foundation.pager.PagerState, viewModel: BlogOverviewViewModel) {
     val scope = rememberCoroutineScope()
     TabRow(
         selectedTabIndex = pagerState.currentPage,
@@ -149,17 +149,16 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState, viewModel: BlogOverviewVie
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TabsContent(
     tabs: List<TabItem>,
-    pagerState: PagerState,
+    pagerState: androidx.compose.foundation.pager.PagerState,
     onNavigateToDetail: (BlogModel) -> Unit,
     state: BlogOverviewState
 ) {
     HorizontalPager(
         state = pagerState,
-        count = tabs.size,
         modifier = Modifier.fillMaxSize(),
         userScrollEnabled = false
     ) { page ->
