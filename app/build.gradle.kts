@@ -2,7 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android") version "2.54"
+//    id("com.google.dagger.hilt.android") version "2.54" apply false
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -165,3 +166,7 @@ configurations.all {
         }
     }
 }
+
+//hilt {
+//    enableAggregatingTask = false
+//}
