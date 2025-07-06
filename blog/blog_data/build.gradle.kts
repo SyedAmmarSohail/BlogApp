@@ -36,22 +36,23 @@ android {
 }
 
 dependencies {
-    "implementation"(project(Modules.core))
-    "implementation"(project(Modules.blogDomain))
+    implementation(project(Modules.core))
+    implementation(project(Modules.blogDomain))
 
-    "implementation"(Retrofit.okHttp)
-    "implementation"(DaggerHilt.hiltAndroid)
-    "implementation"(Retrofit.retrofit)
-    "implementation"(Retrofit.okHttpLoggingInterceptor)
-    "implementation"(Retrofit.moshiConverter)
-    "implementation"(Moshi.moshiKotlin)
-    "implementation"(Moshi.moshi)
+    implementation(Retrofit.okHttp)
+    kapt(DaggerHilt.hiltCompiler)
+    implementation(DaggerHilt.hiltAndroid)
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+    implementation(Retrofit.moshiConverter)
+    implementation(Moshi.moshiKotlin)
+    implementation(Moshi.moshi)
 
-    "kapt"(Moshi.moshiCodegen)
+    kapt(Moshi.moshiCodegen)
 
-    "kapt"(Room.roomCompiler)
-    "implementation"(Room.roomKtx)
-    "implementation"(Room.roomRuntime)
+    kapt(Room.roomCompiler)
+    implementation(Room.roomKtx)
+    implementation(Room.roomRuntime)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
