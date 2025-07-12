@@ -44,7 +44,7 @@ object BlogDataModule {
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-            .create()
+            .create(BlogApi::class.java)
     }
 
     @Provides
